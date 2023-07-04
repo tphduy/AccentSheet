@@ -11,6 +11,6 @@ final class PickupPointPickerViewModelV2: ObservableObject {
     @Published var keywords: String = ""
     @Published var selected: PickupPoint? = nil
     @Published var points: Loadable<[PickupPoint], Error> = .loaded([])
-    @Published var isSheetPresented: Bool = true
+    @Published var isSheetPresented: Bool = false
     @Published var map: PickupPointMapViewModel = PickupPointMapViewModel()
 }

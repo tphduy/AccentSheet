@@ -18,6 +18,9 @@ struct PickupPointPickerV2: View {
             } content: {
                 Text("Content")
             }
+            .onAppear {
+                viewModel.isSheetPresented = true
+            }
     }
 }
 

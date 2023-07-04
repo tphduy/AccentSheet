@@ -12,7 +12,13 @@ struct SwiftUI_PlaygroundApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                PickupPointPickerV2()
+                Text("Foo Bar")
+                    .navigationTitle("Lorem Ipsum")
+                    .accentSheet(isPresented: .constant(true)) {
+                        Text("Header")
+                    } content: {
+                        Text("Content")
+                    }
             }
         }
     }

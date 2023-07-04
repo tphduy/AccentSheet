@@ -10,29 +10,32 @@ import SwiftUI
 public struct AccentSheet<SheetHeader, SheetContent>: ViewModifier where SheetHeader: View, SheetContent: View {
     // MARK: States
 
-    @Binding public var isPresented: Bool
+    @Binding var isPresented: Bool
 
-    public let configuration: AccentSheetConfiguration
+    @State var detent: AccentPresentationDentent = .natural
 
-    public let sheetHeader: SheetHeader
+    @GestureState var offset: CGSize = .zero
 
-    public let sheetContent: SheetContent
+    let configuration: AccentSheetConfiguration
+
+    let sheetHeader: SheetHeader
+
+    let sheetContent: SheetContent
 
     // MARK: ViewModifier
 
     public func body(content: Content) -> some View {
         ZStack(alignment: .bottom) {
-            ZStack{
+            ZStack {
                 content
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
 
             if isPresented {
-                shadowedSheet
-                    .transition(.move(edge: .bottom))
-                    .animation(.default)
+                draggableSheet
             }
         }
+
     }
 
     // MARK: Utilities
@@ -41,11 +44,21 @@ public struct AccentSheet<SheetHeader, SheetContent>: ViewModifier where SheetHe
         Capsule()
             .fill(Color.gray)
             .frame(width: 36, height: 5)
-            .padding()
+            .padding(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
     }
 
-    private var sheet: some View {
-        VStack(spacing: configuration.spacing) {
+    private var dragGesture: some Gesture {
+        DragGesture()
+            .updating($offset) { value, state, _ in
+                state = CGSize(width: 0, height: value.translation.height)
+            }
+            .onEnded { (value: DragGesture.Value) in
+                // Snap to an available detent if needed.
+            }
+    }
+
+    @ViewBuilder private var draggableSheet: some View {
+        VStack(alignment: configuration.alignment, spacing: configuration.spacing) {
             dragIndicator
             sheetHeader
             sheetContent
@@ -57,35 +70,30 @@ public struct AccentSheet<SheetHeader, SheetContent>: ViewModifier where SheetHe
                 .ignoresSafeArea(edges: [.bottom, .horizontal])
         )
         .compositingGroup()
-    }
-
-    @ViewBuilder private var shadowedSheet: some View {
-        if configuration.isShadowEnabled {
-            sheet.shadow(radius: configuration.cornerRadius)
-        } else {
-            sheet
-        }
+        .shadow(radius: configuration.cornerRadius)
+        .offset(offset)
+        .gesture(dragGesture)
+        .animation(
+            .interpolatingSpring(
+                mass: 1.2,
+                stiffness: 200,
+                damping: 25
+            )
+        )
+        .transition(.move(edge: .bottom))
     }
 }
 
 struct AccentSheet_Previews: PreviewProvider {
-    static func sheet(isPresented: Bool) -> some View {
-        Button("Foo") {}
-            .padding()
-            .accentSheet(isPresented: .constant(isPresented)) {
-                Text("Header")
-            } content: {
-                Text("Content")
-            }
-    }
-
     static var previews: some View {
-        Group {
-            sheet(isPresented: true)
-                .previewDisplayName("Showed")
-
-            sheet(isPresented: false)
-                .previewDisplayName("Hidden")
+        NavigationView {
+            Text("Foo Bar")
+                .navigationTitle("Lorem Ipsum")
+                .accentSheet(isPresented: .constant(true)) {
+                    Text("Header")
+                } content: {
+                    Text("Content")
+                }
         }
     }
 }

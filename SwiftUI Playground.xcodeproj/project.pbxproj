@@ -101,6 +101,13 @@
 			path = AccentSheet;
 			sourceTree = "<group>";
 		};
+		3DB35CC42A53D72800451184 /* Discardable */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Discardable;
+			sourceTree = "<group>";
+		};
 		3DC871B22A1F5C9000C219B2 = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +131,7 @@
 		3DC871BD2A1F5C9000C219B2 /* SwiftUI Playground */ = {
 			isa = PBXGroup;
 			children = (
+				3DB35CC42A53D72800451184 /* Discardable */,
 				3D10AEDD2A4A96EB00BFB1EB /* AccentSheet */,
 				3DE5703F2A4582C30068A84F /* PickupPointPicker */,
 				3DE570382A4582280068A84F /* Dependencies */,
