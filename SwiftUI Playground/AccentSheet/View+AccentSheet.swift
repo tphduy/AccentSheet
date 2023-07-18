@@ -11,16 +11,21 @@ extension View {
     func accentSheet(
         isPresented: Binding<Bool>,
         configuration: AccentSheetConfiguration = AccentSheetConfiguration(),
-        @ViewBuilder header: @escaping () -> some View = EmptyView.init,
-        @ViewBuilder content: @escaping () -> some View
+        @ViewBuilder sheet: @escaping () -> some View
     ) -> some View {
         modifier(
             AccentSheet(
                 isPresented: isPresented,
                 configuration: configuration,
-                sheetHeader: header(),
-                sheetContent: content()
+                sheet: sheet
             )
         )
+    }
+
+    func accentPresentationDetents(
+        _ detents: Set<AccentPresentationDentent> = [.natural],
+        selection: ((AccentPresentationDentent) -> Void)? = nil
+    ) -> some View {
+        preference(key: AccentPresentationDetentsKey.self, value: detents)
     }
 }

@@ -13,19 +13,35 @@ struct PickupPointPickerV2: View {
     var body: some View {
         PickupPointMap(viewModel: viewModel.map)
             .ignoresSafeArea()
-            .accentSheet(isPresented: $viewModel.isSheetPresented) {
-                Text("Header")
-            } content: {
-                Text("Content")
+            .navigationTitle("Pickup Point Picker")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Toggle("Toggle Bottom Sheet", isOn: $viewModel.isSheetPresented)
+                }
             }
-            .onAppear {
-                viewModel.isSheetPresented = true
+            .accentSheet(isPresented: $viewModel.isSheetPresented) {
+                List {
+                    Section {
+                        ForEach(0...100, id: \.self) { (number: Int) in
+                            Text("\(number)")
+                        }
+                    } header: {
+                        Text("Header")
+                            .frame(maxWidth: .infinity)
+                            .font(.title)
+                            .background(Color.red.opacity(0.5))
+                    }
+                }
+                .listStyle(.plain)
+                .accentPresentationDetents([.medium, .large])
             }
     }
 }
 
 struct PickupPointPickerV2_Preview: PreviewProvider {
     static var previews: some View {
-        PickupPointPickerV2()
+        NavigationView {
+            PickupPointPickerV2()
+        }
     }
 }
