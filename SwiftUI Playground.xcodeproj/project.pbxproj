@@ -12,7 +12,6 @@
 		3D2EC10E2A45A220009A2623 /* PickupPointMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2EC10D2A45A220009A2623 /* PickupPointMapViewModel.swift */; };
 		3D37CEE12A66639600F674FE /* AccentPresentationDetent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D37CEE02A66639600F674FE /* AccentPresentationDetent.swift */; };
 		3D5398A22A4D625400FC71F3 /* View+AccentSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5398A12A4D625400FC71F3 /* View+AccentSheet.swift */; };
-		3D9AD3DD2A5D04E800EB7A47 /* ParallaxHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9AD3DC2A5D04E800EB7A47 /* ParallaxHeader.swift */; };
 		3D9AD3DF2A5D051C00EB7A47 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9AD3DE2A5D051C00EB7A47 /* ContentView.swift */; };
 		3DA065412A49ECAB00FA4DE1 /* AccentSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA065402A49ECAB00FA4DE1 /* AccentSheet.swift */; };
 		3DB057582A684CF70025625A /* AccentPresentationCornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB057572A684CF70025625A /* AccentPresentationCornerRadius.swift */; };
@@ -56,7 +55,6 @@
 		3D2EC10D2A45A220009A2623 /* PickupPointMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupPointMapViewModel.swift; sourceTree = "<group>"; };
 		3D37CEE02A66639600F674FE /* AccentPresentationDetent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccentPresentationDetent.swift; sourceTree = "<group>"; };
 		3D5398A12A4D625400FC71F3 /* View+AccentSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+AccentSheet.swift"; sourceTree = "<group>"; };
-		3D9AD3DC2A5D04E800EB7A47 /* ParallaxHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxHeader.swift; sourceTree = "<group>"; };
 		3D9AD3DE2A5D051C00EB7A47 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3DA065402A49ECAB00FA4DE1 /* AccentSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentSheet.swift; sourceTree = "<group>"; };
 		3DB057572A684CF70025625A /* AccentPresentationCornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentPresentationCornerRadius.swift; sourceTree = "<group>"; };
@@ -126,7 +124,6 @@
 		3DB35CC42A53D72800451184 /* Discardable */ = {
 			isa = PBXGroup;
 			children = (
-				3D9AD3DC2A5D04E800EB7A47 /* ParallaxHeader.swift */,
 				3D9AD3DE2A5D051C00EB7A47 /* ContentView.swift */,
 			);
 			path = Discardable;
@@ -354,7 +351,6 @@
 				3DC871BF2A1F5C9000C219B2 /* SwiftUI_PlaygroundApp.swift in Sources */,
 				3DB0575C2A684DC50025625A /* AccentPresentationDetentsKey.swift in Sources */,
 				3DE570412A4591F60068A84F /* Loadable.swift in Sources */,
-				3D9AD3DD2A5D04E800EB7A47 /* ParallaxHeader.swift in Sources */,
 				3DB0575E2A684DED0025625A /* AccentPresentationDragIndicatorKey.swift in Sources */,
 				3D9AD3DF2A5D051C00EB7A47 /* ContentView.swift in Sources */,
 				3D5398A22A4D625400FC71F3 /* View+AccentSheet.swift in Sources */,

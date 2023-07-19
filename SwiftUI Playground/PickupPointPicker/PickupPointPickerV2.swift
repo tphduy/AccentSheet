@@ -12,21 +12,19 @@ struct PickupPointPickerV2: View {
 
     var body: some View {
         PickupPointMap(viewModel: viewModel.map)
-            .ignoresSafeArea()
+            .ignoresSafeArea(edges: [.bottom, .horizontal, .leading, .trailing])
             .navigationTitle("Pickup Point Picker")
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem {
                     Toggle("Toggle Bottom Sheet", isOn: $viewModel.isSheetPresented)
                 }
             }
             .accentSheet(isPresented: $viewModel.isSheetPresented) {
-                VStack {
-                    Text("Header")
-                        .font(.title)
-                    Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum")
-                }
-                .padding()
-                .accentPresentationDetents([.height(100), .natural, .large])
+                Text("Carrier List")
+                    .font(.title)
+                    .padding()
+                    .accentPresentationDetents([.natural, .large])
+                    .accentPresentationDragIndicator(.visible)
             }
     }
 }
