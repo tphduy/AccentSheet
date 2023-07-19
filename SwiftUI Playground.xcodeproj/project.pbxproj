@@ -19,7 +19,8 @@
 		3DB0575A2A684D550025625A /* AccentInteractiveDismissDisabledKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB057592A684D550025625A /* AccentInteractiveDismissDisabledKey.swift */; };
 		3DB0575C2A684DC50025625A /* AccentPresentationDetentsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB0575B2A684DC50025625A /* AccentPresentationDetentsKey.swift */; };
 		3DB0575E2A684DED0025625A /* AccentPresentationDragIndicatorKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB0575D2A684DED0025625A /* AccentPresentationDragIndicatorKey.swift */; };
-		3DB057602A684F730025625A /* AccentPresentationPassthroughtBackgroundKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB0575F2A684F730025625A /* AccentPresentationPassthroughtBackgroundKey.swift */; };
+		3DB057602A684F730025625A /* AccentPresentationPassthroughBackgroundDisabledKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB0575F2A684F730025625A /* AccentPresentationPassthroughBackgroundDisabledKey.swift */; };
+		3DB057622A685F0E0025625A /* AccentPresentationShadowCornerRadiusKeyAccentPresentationShadowCornerRadiusKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB057612A685F0E0025625A /* AccentPresentationShadowCornerRadiusKeyAccentPresentationShadowCornerRadiusKey.swift */; };
 		3DC871BF2A1F5C9000C219B2 /* SwiftUI_PlaygroundApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC871BE2A1F5C9000C219B2 /* SwiftUI_PlaygroundApp.swift */; };
 		3DC871C32A1F5C9100C219B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DC871C22A1F5C9100C219B2 /* Assets.xcassets */; };
 		3DC871C72A1F5C9100C219B2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DC871C62A1F5C9100C219B2 /* Preview Assets.xcassets */; };
@@ -62,7 +63,8 @@
 		3DB057592A684D550025625A /* AccentInteractiveDismissDisabledKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentInteractiveDismissDisabledKey.swift; sourceTree = "<group>"; };
 		3DB0575B2A684DC50025625A /* AccentPresentationDetentsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentPresentationDetentsKey.swift; sourceTree = "<group>"; };
 		3DB0575D2A684DED0025625A /* AccentPresentationDragIndicatorKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentPresentationDragIndicatorKey.swift; sourceTree = "<group>"; };
-		3DB0575F2A684F730025625A /* AccentPresentationPassthroughtBackgroundKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentPresentationPassthroughtBackgroundKey.swift; sourceTree = "<group>"; };
+		3DB0575F2A684F730025625A /* AccentPresentationPassthroughBackgroundDisabledKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentPresentationPassthroughBackgroundDisabledKey.swift; sourceTree = "<group>"; };
+		3DB057612A685F0E0025625A /* AccentPresentationShadowCornerRadiusKeyAccentPresentationShadowCornerRadiusKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentPresentationShadowCornerRadiusKeyAccentPresentationShadowCornerRadiusKey.swift; sourceTree = "<group>"; };
 		3DC871BB2A1F5C9000C219B2 /* SwiftUI Playground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftUI Playground.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DC871BE2A1F5C9000C219B2 /* SwiftUI_PlaygroundApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI_PlaygroundApp.swift; sourceTree = "<group>"; };
 		3DC871C22A1F5C9100C219B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -112,10 +114,11 @@
 				3D37CEE02A66639600F674FE /* AccentPresentationDetent.swift */,
 				3DB0575B2A684DC50025625A /* AccentPresentationDetentsKey.swift */,
 				3DB0575D2A684DED0025625A /* AccentPresentationDragIndicatorKey.swift */,
+				3DB0575F2A684F730025625A /* AccentPresentationPassthroughBackgroundDisabledKey.swift */,
 				3DA065402A49ECAB00FA4DE1 /* AccentSheet.swift */,
 				3D152A382A67E51900615066 /* AccentVisibility.swift */,
 				3D5398A12A4D625400FC71F3 /* View+AccentSheet.swift */,
-				3DB0575F2A684F730025625A /* AccentPresentationPassthroughtBackgroundKey.swift */,
+				3DB057612A685F0E0025625A /* AccentPresentationShadowCornerRadiusKeyAccentPresentationShadowCornerRadiusKey.swift */,
 			);
 			path = AccentSheet;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 				3DB057582A684CF70025625A /* AccentPresentationCornerRadius.swift in Sources */,
 				3DE5703A2A4582470068A84F /* PickupPoint.swift in Sources */,
 				3D2EC10C2A45A213009A2623 /* PickupPointMap.swift in Sources */,
+				3DB057622A685F0E0025625A /* AccentPresentationShadowCornerRadiusKeyAccentPresentationShadowCornerRadiusKey.swift in Sources */,
 				3D152A392A67E51900615066 /* AccentVisibility.swift in Sources */,
 				3DC871BF2A1F5C9000C219B2 /* SwiftUI_PlaygroundApp.swift in Sources */,
 				3DB0575C2A684DC50025625A /* AccentPresentationDetentsKey.swift in Sources */,
@@ -356,7 +360,7 @@
 				3D5398A22A4D625400FC71F3 /* View+AccentSheet.swift in Sources */,
 				3DA065412A49ECAB00FA4DE1 /* AccentSheet.swift in Sources */,
 				3D37CEE12A66639600F674FE /* AccentPresentationDetent.swift in Sources */,
-				3DB057602A684F730025625A /* AccentPresentationPassthroughtBackgroundKey.swift in Sources */,
+				3DB057602A684F730025625A /* AccentPresentationPassthroughBackgroundDisabledKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

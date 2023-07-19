@@ -21,25 +21,30 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
     /// The default value is `[.natural]`.
     @State private var detents: Set<AccentPresentationDetent> = Set([.natural])
 
-    /// The corner radius of the background and shadow of the sheet, or nil to use the system default.
+    /// A flag that indicates whether to prevent nonprogrammatic dismissal of the containing view hierarchy when presented in an accent sheet or popover.
     ///
-    /// The default value is `8`.
-    @State private var cornerRadius: CGFloat = 8
+    /// The default value is `false`.
+    @State private var isInteractiveDismissDisabled: Bool = false
 
-    /// The preferred visibility of the passthrought background.
+    /// A flag that indicates whether the passthrough background is disabled.
     ///
-    /// The default value is `.automatic`.
-    @State private var passthroughtBackgroundVisibility: AccentVisibility = .automatic
+    /// The default value is `false`.
+    @State private var isPassthroughBackgroundDisabled: Bool = false
 
     /// The preferred visibility of the drag indicator.
     ///
     /// The default value is `.automatic`.
     @State private var dragIndicatorVisibility: AccentVisibility = .automatic
 
-    /// A flag that indicates whether to prevent nonprogrammatic dismissal of the containing view hierarchy when presented in an accent sheet or popover.
+    /// The corner radius of the background of the sheet, or nil to use the system default.
     ///
-    /// The default value is `false`.
-    @State private var isInteractiveDismissDisabled: Bool = false
+    /// The default value is `8`.
+    @State private var backgroundCornerRadius: CGFloat = 8
+
+    /// The corner radius of the shadow of the sheet, or nil to use the system default.
+    ///
+    /// The default value is `8`.
+    @State private var shadowCornerRadius: CGFloat = 8
 
     /// The self-sizing size of the sheet.
     ///
@@ -80,8 +85,8 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
 
             if isPresented {
                 // A view between the presenting view and the sheet to pass through the gesture or dismiss when tapped.
-                if isPassthroughtBackgroundEnabled {
-                     passthroughtBackground
+                if !isPassthroughBackgroundDisabled {
+                     passthroughBackground
                 }
 
                 // Reads The available space.
@@ -106,7 +111,7 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
                     .frame(maxWidth: .infinity)
                     .background(
                         GeometryReader { (sheetGeometry: GeometryProxy) in
-                            RoundedRectangle(cornerRadius: cornerRadius)
+                            RoundedRectangle(cornerRadius: backgroundCornerRadius)
                                 .fill(Color.white)
                                 .ignoresSafeArea(edges: [.bottom, .horizontal])
                                 // The background always covers the bottom/horizontal safe area.
@@ -118,23 +123,26 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
                         }
                     )
                     .compositingGroup()
-                    .shadow(radius: cornerRadius)
+                    .shadow(radius: shadowCornerRadius)
                     .offset(offset)
                     .gesture(dragGesture(in: geometry))
                     .animation(.spring(), value: offset)
                     .transition(.move(edge: .bottom))
                     .onPreferenceChange(AccentPresentationDetentsKey.self, perform: onDetentsChanged(_:))
-                    .onPreferenceChange(AccentPresentationPassthroughtBackgroundKey.self) { newValue in
-                        passthroughtBackgroundVisibility = newValue
+                    .onPreferenceChange(AccentInteractiveDismissDisabledKey.self) { newValue in
+                        isInteractiveDismissDisabled = newValue
+                    }
+                    .onPreferenceChange(AccentPresentationPassthroughBackgroundDisabledKey.self) { newValue in
+                        isPassthroughBackgroundDisabled = newValue
                     }
                     .onPreferenceChange(AccentPresentationDragIndicatorKey.self) { newValue in
                         dragIndicatorVisibility = newValue
                     }
-                    .onPreferenceChange(AccentInteractiveDismissDisabledKey.self) { newValue in
-                        isInteractiveDismissDisabled = newValue
-                    }
                     .onPreferenceChange(AccentPresentationCornerRadiusKey.self) { newValue in
-                        cornerRadius = newValue ?? 8
+                        backgroundCornerRadius = newValue ?? 8
+                    }
+                    .onPreferenceChange(AccentPresentationShadowCornerRadiusKey.self) { newValue in
+                        shadowCornerRadius = newValue ?? 8
                     }
                 }
             }
@@ -179,22 +187,12 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
     }
 
     /// A view is sandwiched between the presenting view and the sheet to pass through the gesture or dismiss when tapped.
-    private var passthroughtBackground: some View {
+    private var passthroughBackground: some View {
         Color.black
             .opacity(0.2)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .edgesIgnoringSafeArea(.all)
             .contentShape(Rectangle())
-    }
-
-    /// Returns a flag that indicates whether the passthrought background is enabled.
-    private var isPassthroughtBackgroundEnabled: Bool {
-        switch passthroughtBackgroundVisibility {
-        case .automatic, .visible:
-            return true
-        case .hidden:
-            return false
-        }
     }
 
     /// A view that indicates the sheet can resize or dismiss interactively.
@@ -302,9 +300,10 @@ struct AccentSheet_Previews: PreviewProvider {
                 .navigationTitle("Accent Sheet")
                 .accentSheet(isPresented: .constant(true)) {
                     VStack(spacing: 16) {
-                        Text("Lorem Ipsum")
+                        Text("License Agreement")
                             .font(.title)
                         Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
+                        Button("Dismiss") {}
                     }
                     .padding()
                     .accentPresentationDetents([.natural, .large])
@@ -325,7 +324,7 @@ struct AccentSheet_Previews: PreviewProvider {
                         }
                         .listStyle(.plain)
                     }
-                    .accentPresentationDetents([.height(150), .medium, .large])
+                    .accentPresentationDetents([.fraction(0.2), .medium, .large])
                 }
         }
     }

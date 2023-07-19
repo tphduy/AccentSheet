@@ -35,10 +35,10 @@ extension View {
         preference(key: AccentInteractiveDismissDisabledKey.self, value: isDisabled)
     }
 
-    /// Sets the visibility of the passthrought background that is sandwiched  between the presenting view and the accent sheet to pass through the gesture or dismiss when tapped.
-    /// - Parameter visibility: The preferred visibility of the passthrought background.
-    func accentPresentationPassthroughtBackground(_ visibility: AccentVisibility = .automatic) -> some View {
-        preference(key: AccentPresentationPassthroughtBackgroundKey.self, value: visibility)
+    /// Disables the passthrough background that is sandwiched between the presenting view and the accent sheet to pass through the gesture or dismiss when tapped.
+    /// - Parameter isDisabled: A flag that indicates whether the passthrough background is disabled.
+    func accentPresentationPassthroughBackgroundDisabled(_ isDisabled: Bool = true) -> some View {
+        preference(key: AccentPresentationPassthroughBackgroundDisabledKey.self, value: isDisabled)
     }
 
     /// Sets the visibility of the drag indicator on top of an accent sheet.
@@ -51,6 +51,18 @@ extension View {
     /// - Parameter cornerRadius: The corner radius, or nil to use the system default.
     func accentPresentationCornerRadius(_ cornerRadius: CGFloat? = nil) -> some View {
         preference(key: AccentPresentationCornerRadiusKey.self, value: cornerRadius)
+    }
+
+    /// Requests that the shadow of presentation have a specific corner radius.
+    /// - Parameter cornerRadius: The corner radius, or nil to use the system default. Specifying `0` to disable the shadow.
+    func accentPresentationShadowCornerRadius(_ cornerRadius: CGFloat? = nil) -> some View {
+        preference(key: AccentPresentationShadowCornerRadiusKey.self, value: cornerRadius)
+    }
+
+    /// Disables the shadow of presentation.
+    /// - Parameter isDisabled: A flag that indicates whether the shadow is disabled.
+    func accentPresentationShadowDisabled(_ isDisabled: Bool = true) -> some View {
+        preference(key: AccentPresentationShadowCornerRadiusKey.self, value: isDisabled ? 0 : 8)
     }
 }
 

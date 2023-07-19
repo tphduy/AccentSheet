@@ -1,13 +1,13 @@
 //
-//  InteractiveDismissDisabledKey.swift
+//  AccentPresentationPassthroughBackgroundDisabledKey.swift
 //  SwiftUI Playground
 //
-//  Created by Duy Tran on 19/07/2023.
+//  Created by Duy Tran on 20/07/2023.
 //
 
 import SwiftUI
 
-struct AccentInteractiveDismissDisabledKey: PreferenceKey {
+struct AccentPresentationPassthroughBackgroundDisabledKey: PreferenceKey {
     static var defaultValue: Bool {
         false
     }
