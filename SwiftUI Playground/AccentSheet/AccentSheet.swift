@@ -11,9 +11,6 @@ import OSLog
 struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
     // MARK: States
 
-    /// A binding value that determines whether to present the sheet that you create in the modifier’s content closure.
-    @Binding private var isPresented: Bool
-
     /// The curent detent where the sheet naturally rests.
     ///
     /// The default value is `.natural`.
@@ -41,12 +38,10 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
 
     @State private var configuration: AccentPresentationConfiguration = AccentPresentationConfiguration()
 
-    private let sheet: () -> Sheet
+    /// A binding value that determines whether to present the sheet that you create in the modifier’s content closure.
+    @Binding private var isPresented: Bool
 
-    private let logger = Logger(
-        subsystem: Bundle.main.bundleIdentifier ?? "",
-        category: "\(Self.self)"
-    )
+    private let sheet: () -> Sheet
 
     // MARK: Init
 
