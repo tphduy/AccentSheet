@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// A group of properties to configure an accent sheet.
 struct AccentPresentationConfiguration: Equatable {
     /// The distance between the drag indicator and the content in a vertical stack..
     ///
@@ -23,6 +24,9 @@ struct AccentPresentationConfiguration: Equatable {
     /// The defualt value is `true`.
     var isShadowEnabled: Bool = true
 
+    /// A flag that indicates whether a view between the presenting view and the sheet is enabled that passes through the gesture or dismisses when tapped.
+    ///
+    /// The defualt value is `true`.
     var isPassthroughtBackgroundEnabled: Bool = true
 }
 

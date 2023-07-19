@@ -20,23 +20,13 @@ struct PickupPointPickerV2: View {
                 }
             }
             .accentSheet(isPresented: $viewModel.isSheetPresented) {
-                List {
-                    Section {
-                        ForEach(0...100, id: \.self) { (number: Int) in
-                            Text("\(number)")
-                        }
-                    } header: {
-                        Button("Confirm") {
-                            viewModel.isSheetPresented = false
-                        }
-//                        Text("Select a carrier")
-//                            .frame(maxWidth: .infinity)
-//                            .font(.title)
-//                            .background(Color.red.opacity(0.5))
-                    }
+                VStack {
+                    Text("Header")
+                        .font(.title)
+                    Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum")
                 }
-                .listStyle(.plain)
-                .accentPresentationDetents([.height(100), .medium, .large])
+                .padding()
+                .accentPresentationDetents([.height(100), .large])
             }
     }
 }

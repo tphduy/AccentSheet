@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D152A392A67E51900615066 /* AccentVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D152A382A67E51900615066 /* AccentVisibility.swift */; };
 		3D2EC10C2A45A213009A2623 /* PickupPointMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2EC10B2A45A213009A2623 /* PickupPointMap.swift */; };
 		3D2EC10E2A45A220009A2623 /* PickupPointMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2EC10D2A45A220009A2623 /* PickupPointMapViewModel.swift */; };
 		3D37CEE12A66639600F674FE /* AccentPresentationDetent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D37CEE02A66639600F674FE /* AccentPresentationDetent.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3D152A382A67E51900615066 /* AccentVisibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentVisibility.swift; sourceTree = "<group>"; };
 		3D2EC10B2A45A213009A2623 /* PickupPointMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupPointMap.swift; sourceTree = "<group>"; };
 		3D2EC10D2A45A220009A2623 /* PickupPointMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupPointMapViewModel.swift; sourceTree = "<group>"; };
 		3D37CEE02A66639600F674FE /* AccentPresentationDetent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccentPresentationDetent.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				3D5398A42A4D632A00FC71F3 /* AccentPresentationConfiguration.swift */,
 				3DA065402A49ECAB00FA4DE1 /* AccentSheet.swift */,
 				3D5398A12A4D625400FC71F3 /* View+AccentSheet.swift */,
+				3D152A382A67E51900615066 /* AccentVisibility.swift */,
 			);
 			path = AccentSheet;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				3D2EC10E2A45A220009A2623 /* PickupPointMapViewModel.swift in Sources */,
 				3DE5703A2A4582470068A84F /* PickupPoint.swift in Sources */,
 				3D2EC10C2A45A213009A2623 /* PickupPointMap.swift in Sources */,
+				3D152A392A67E51900615066 /* AccentVisibility.swift in Sources */,
 				3DC871BF2A1F5C9000C219B2 /* SwiftUI_PlaygroundApp.swift in Sources */,
 				3DE570412A4591F60068A84F /* Loadable.swift in Sources */,
 				3D5398A52A4D632A00FC71F3 /* AccentPresentationConfiguration.swift in Sources */,
