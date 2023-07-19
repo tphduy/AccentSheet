@@ -92,7 +92,6 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
                         if isDragIndicatorEnabled {
                             dragIndicator
                         }
-
                         // Clips the content to avoid it spreading over the parent bounds.
                         // Example: if `sheet()` is a list and the translation reached over the top safe area inset, the list frame will spread over the parent bounds
                         if #available(iOS 16.0, macOS 13.0, macCatalyst 16.0, tvOS 16.0, watchOS 9.0, *) {
@@ -104,6 +103,7 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
                                 .clipped()
                         }
                     }
+                    .frame(maxWidth: .infinity)
                     .background(
                         GeometryReader { (sheetGeometry: GeometryProxy) in
                             RoundedRectangle(cornerRadius: cornerRadius)
@@ -245,17 +245,18 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
     ///   - geometry: A proxy for access to the size and coordinate space (for anchor resolution) of the container view.
     /// - Returns: The spacing from top of the sheet.
     private func spacing(for detent: AccentPresentationDetent, in geometry: GeometryProxy) -> CGFloat {
+        let available = geometry.size.height - geometry.safeAreaInsets.bottom
         switch detent {
         case .natural:
-            return geometry.size.height - sheetSize.height
+            return available - sheetSize.height
         case .medium:
-            return geometry.size.height / 2
+            return available / 2
         case .large:
             return 0
         case .fraction(let fraction):
-            return geometry.size.height * (1 - fraction)
+            return available * (1 - fraction)
         case .height(let height):
-            return geometry.size.height - height
+            return available - height
         }
     }
 
@@ -295,7 +296,7 @@ struct AccentSheet_Previews: PreviewProvider {
         }
     }
 
-    static var staticContent: some View {
+    static private var staticContent: some View {
         NavigationView {
             Text("Content")
                 .navigationTitle("Accent Sheet")
@@ -303,15 +304,15 @@ struct AccentSheet_Previews: PreviewProvider {
                     VStack(spacing: 16) {
                         Text("Lorem Ipsum")
                             .font(.title)
-                        Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum")
+                        Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
                     }
                     .padding()
-                    .accentPresentationDetents([.height(100), .natural, .large])
+                    .accentPresentationDetents([.natural, .large])
                 }
         }
     }
 
-    static var scrollableContent: some View {
+    static private var scrollableContent: some View {
         NavigationView {
             Text("Content")
                 .navigationTitle("Accent Sheet")

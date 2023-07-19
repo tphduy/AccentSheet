@@ -14,24 +14,28 @@ struct ContentView: View {
         Text("Content")
             .navigationTitle("Accent Sheet")
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Toggle("Toggle Bottom Sheet", isOn: $isPresented)
+                ToolbarItem {
+                    Button("Toggle") {
+                        isPresented.toggle()
+                    }
                 }
             }
             .accentSheet(isPresented: $isPresented) {
                 VStack(spacing: 16) {
                     Text("Lorem Ipsum")
                         .font(.title)
-                    Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum")
+                    Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
                 }
                 .padding()
-                .accentPresentationDetents([.height(100), .natural, .large])
+                .accentPresentationDetents([.natural, .large])
             }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        NavigationView {
+            ContentView()
+        }
     }
 }
