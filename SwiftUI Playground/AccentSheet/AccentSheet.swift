@@ -21,6 +21,26 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
     /// The default value is `[.natural]`.
     @State private var detents: Set<AccentPresentationDetent> = Set([.natural])
 
+    /// The corner radius of the background and shadow of the sheet, or nil to use the system default.
+    ///
+    /// The default value is `8`.
+    @State private var cornerRadius: CGFloat = 8
+
+    /// The preferred visibility of the passthrought background.
+    ///
+    /// The default value is `.automatic`.
+    @State private var passthroughtBackgroundVisibility: AccentVisibility = .automatic
+
+    /// The preferred visibility of the drag indicator.
+    ///
+    /// The default value is `.automatic`.
+    @State private var dragIndicatorVisibility: AccentVisibility = .automatic
+
+    /// A flag that indicates whether to prevent nonprogrammatic dismissal of the containing view hierarchy when presented in an accent sheet or popover.
+    ///
+    /// The default value is `false`.
+    @State private var isInteractiveDismissDisabled: Bool = false
+
     /// The self-sizing size of the sheet.
     ///
     /// The default value is `.zero`.
@@ -30,9 +50,6 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
     ///
     /// The default value is `.zero`.
     @GestureState private var translation: CGSize = .zero
-
-    /// A group of properties to configure the accent sheet.
-    @State private var configuration: AccentPresentationConfiguration = AccentPresentationConfiguration()
 
     /// A binding value that determines whether to present the sheet that you create in the modifier’s content closure.
     @Binding private var isPresented: Bool
@@ -63,7 +80,7 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
 
             if isPresented {
                 // A view between the presenting view and the sheet to pass through the gesture or dismiss when tapped.
-                if configuration.isPassthroughtBackgroundEnabled {
+                if isPassthroughtBackgroundEnabled {
                      passthroughtBackground
                 }
 
@@ -71,8 +88,11 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
                 GeometryReader { (geometry: GeometryProxy) in
                     let offset =  offset(in: geometry)
                     // The self sizing sheet.
-                    VStack(spacing: configuration.spacing) {
-                        dragIndicator
+                    VStack {
+                        if isDragIndicatorEnabled {
+                            dragIndicator
+                        }
+
                         // Clips the content to avoid it spreading over the parent bounds.
                         // Example: if `sheet()` is a list and the translation reached over the top safe area inset, the list frame will spread over the parent bounds
                         if #available(iOS 16.0, macOS 13.0, macCatalyst 16.0, tvOS 16.0, watchOS 9.0, *) {
@@ -86,7 +106,7 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
                     }
                     .background(
                         GeometryReader { (sheetGeometry: GeometryProxy) in
-                            RoundedRectangle(cornerRadius: configuration.cornerRadius)
+                            RoundedRectangle(cornerRadius: cornerRadius)
                                 .fill(Color.white)
                                 .ignoresSafeArea(edges: [.bottom, .horizontal])
                                 // The background always covers the bottom/horizontal safe area.
@@ -94,21 +114,28 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
                                 // Reads the natural size of the sheet.
                                 .onAppear {
                                     sheetSize = sheetGeometry.size
-                                    print(sheetSize, geometry.size)
                                 }
                         }
                     )
                     .compositingGroup()
-                    .shadow(
-                        color: configuration.isShadowEnabled ? Color(.sRGBLinear, white: 0, opacity: 0.33) : Color.clear,
-                        radius: configuration.cornerRadius
-                    )
+                    .shadow(radius: cornerRadius)
                     .offset(offset)
                     .gesture(dragGesture(in: geometry))
                     .animation(.spring(), value: offset)
                     .transition(.move(edge: .bottom))
                     .onPreferenceChange(AccentPresentationDetentsKey.self, perform: onDetentsChanged(_:))
-                    .onPreferenceChange(AccentPresentationConfigurationKey.self, perform: onConfigurationChanged(_:))
+                    .onPreferenceChange(AccentPresentationPassthroughtBackgroundKey.self) { newValue in
+                        passthroughtBackgroundVisibility = newValue
+                    }
+                    .onPreferenceChange(AccentPresentationDragIndicatorKey.self) { newValue in
+                        dragIndicatorVisibility = newValue
+                    }
+                    .onPreferenceChange(AccentInteractiveDismissDisabledKey.self) { newValue in
+                        isInteractiveDismissDisabled = newValue
+                    }
+                    .onPreferenceChange(AccentPresentationCornerRadiusKey.self) { newValue in
+                        cornerRadius = newValue ?? 8
+                    }
                 }
             }
         }
@@ -128,12 +155,6 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
         guard !newValue.contains(currentDetent) else { return }
         // Snaps to the first available detent or falls back to `.natural` if the available detents are empty.
         currentDetent = newValue.first ?? .natural
-    }
-
-    /// Accepts a new value of configuration.
-    /// - Parameter newValue:
-    private func onConfigurationChanged(_ newValue: AccentPresentationConfiguration) {
-        configuration = newValue
     }
 
     // MARK: Utilities
@@ -157,7 +178,7 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
             }
     }
 
-    /// A view between the presenting view and the sheet to pass through the gesture or dismiss when tapped.
+    /// A view is sandwiched between the presenting view and the sheet to pass through the gesture or dismiss when tapped.
     private var passthroughtBackground: some View {
         Color.black
             .opacity(0.2)
@@ -166,12 +187,32 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
             .contentShape(Rectangle())
     }
 
+    /// Returns a flag that indicates whether the passthrought background is enabled.
+    private var isPassthroughtBackgroundEnabled: Bool {
+        switch passthroughtBackgroundVisibility {
+        case .automatic, .visible:
+            return true
+        case .hidden:
+            return false
+        }
+    }
+
     /// A view that indicates the sheet can resize or dismiss interactively.
     private var dragIndicator: some View {
         Capsule()
             .fill(Color.gray)
             .frame(width: 36, height: 5)
             .padding(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
+    }
+
+    /// Returns a flag that indicates whether the drag indicator is enabled.
+    private var isDragIndicatorEnabled: Bool {
+        switch dragIndicatorVisibility {
+        case .automatic where detents.count > 1, .visible:
+            return true
+        default:
+            return false
+        }
     }
 
     /// Combines the spacing of the current detent with the current translation of a drag gesture to offset of the sheet.
@@ -254,51 +295,36 @@ struct AccentSheet_Previews: PreviewProvider {
         }
     }
 
-    private static var staticContent: some View {
+    static var staticContent: some View {
         NavigationView {
-            AccentSheetWrapper {
-                VStack(spacing: 16) {
-                    Text("Lorem Ipsum")
-                        .font(.title)
-                    Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum")
-                }
-                .padding()
-                .accentPresentationDetents([.height(100), .natural, .large])
-            }
-        }
-    }
-
-    private static var scrollableContent: some View {
-        NavigationView {
-            AccentSheetWrapper {
-                VStack {
-                    Text("Header")
-                        .font(.title)
-                    List(0...100, id: \.self) { (number: Int) in
-                        Text("\(number)")
-                    }
-                    .listStyle(.plain)
-                }
-                .accentPresentationDetents([.height(150), .medium, .large])
-            }
-        }
-    }
-
-    private struct AccentSheetWrapper<Sheet: View>: View {
-        @State private var isPresented = false
-
-        let sheet: () -> Sheet
-
-        var body: some View {
             Text("Content")
                 .navigationTitle("Accent Sheet")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Toggle("Toggle Bottom Sheet", isOn: $isPresented)
+                .accentSheet(isPresented: .constant(true)) {
+                    VStack(spacing: 16) {
+                        Text("Lorem Ipsum")
+                            .font(.title)
+                        Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum")
                     }
+                    .padding()
+                    .accentPresentationDetents([.height(100), .natural, .large])
                 }
-                .accentSheet(isPresented: $isPresented) {
-                    sheet()
+        }
+    }
+
+    static var scrollableContent: some View {
+        NavigationView {
+            Text("Content")
+                .navigationTitle("Accent Sheet")
+                .accentSheet(isPresented: .constant(true)) {
+                    VStack {
+                        Text("Header")
+                            .font(.title)
+                        List(0...100, id: \.self) { (number: Int) in
+                            Text("\(number)")
+                        }
+                        .listStyle(.plain)
+                    }
+                    .accentPresentationDetents([.height(150), .medium, .large])
                 }
         }
     }

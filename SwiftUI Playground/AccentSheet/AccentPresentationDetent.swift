@@ -24,13 +24,3 @@ public enum AccentPresentationDetent: Hashable {
     /// A custom detent with the specified height.
     case height(_ height: CGFloat)
 }
-
-struct AccentPresentationDetentsKey: PreferenceKey {
-    static var defaultValue: [AccentPresentationDetent] {
-        [.natural]
-    }
-
-    static func reduce(value: inout [AccentPresentationDetent], nextValue: () -> [AccentPresentationDetent]) {
-        value = nextValue()
-    }
-}

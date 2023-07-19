@@ -12,7 +12,7 @@ struct SwiftUI_PlaygroundApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                PickupPointPickerV2()
+                ContentView()
             }
         }
     }
