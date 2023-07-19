@@ -26,14 +26,17 @@ struct PickupPointPickerV2: View {
                             Text("\(number)")
                         }
                     } header: {
-                        Text("Header")
-                            .frame(maxWidth: .infinity)
-                            .font(.title)
-                            .background(Color.red.opacity(0.5))
+                        Button("Confirm") {
+                            viewModel.isSheetPresented = false
+                        }
+//                        Text("Select a carrier")
+//                            .frame(maxWidth: .infinity)
+//                            .font(.title)
+//                            .background(Color.red.opacity(0.5))
                     }
                 }
                 .listStyle(.plain)
-                .accentPresentationDetents([.medium, .large])
+                .accentPresentationDetents([.height(100), .medium, .large])
             }
     }
 }

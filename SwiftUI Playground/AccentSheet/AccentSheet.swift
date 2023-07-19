@@ -17,12 +17,12 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
     /// The curent detent where the sheet naturally rests.
     ///
     /// The default value is `.natural`.
-    @State private var currentDetent: AccentPresentationDentent = .natural
+    @State private var currentDetent: AccentPresentationDetent = .natural
 
     /// The potential detents where the sheet may naturally rests.
     ///
     /// The default value is `[.natural]`.
-    @State private var potentialDetents: Set<AccentPresentationDentent> = Set([.natural])
+    @State private var detents: Set<AccentPresentationDetent> = Set([.natural])
 
     /// The self-sizing size of the sheet.
     ///
@@ -39,7 +39,7 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
     /// The default value is `.zero`.
     @GestureState private var translation: CGSize = .zero
 
-    private let configuration: AccentSheetConfiguration
+    @State private var configuration: AccentPresentationConfiguration = AccentPresentationConfiguration()
 
     private let sheet: () -> Sheet
 
@@ -52,10 +52,8 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
 
     init(
         isPresented: Binding<Bool>,
-        configuration: AccentSheetConfiguration = AccentSheetConfiguration(),
         @ViewBuilder sheet: @escaping () -> Sheet = EmptyView.init
     ) {
-        self.configuration = configuration
         self.sheet = sheet
         self._isPresented = isPresented
     }
@@ -68,12 +66,13 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
             content
 
             // A view between the presenting view and the sheet to pass through the gesture or dismiss when tapped.
-            // passthroughtBackground
+            if configuration.isPassthroughtBackgroundEnabled {
+                passthroughtBackground
+            }
 
             // The presented sheet.
             if isPresented {
                 container
-                    .edgesIgnoringSafeArea(configuration.edgesIgnoringSafeArea)
                     .background(sheetBackground)
                     .compositingGroup()
                     .shadow(radius: configuration.cornerRadius)
@@ -81,24 +80,31 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
                     .gesture(dragGesture)
                     .animation(.spring(), value: offset)
                     .onPreferenceChange(AccentPresentationDetentsKey.self, perform: onDetentsChanged(_:))
+                    .onPreferenceChange(AccentPresentationConfigurationKey.self, perform: onConfigurationChanged(_:))
             }
         }
     }
 
     // MARK: Preferences
 
-    /// Accepts the new value of potential detents and validates if the current detent is still valid.
+    /// Accepts a new value of available detents and validate the current detent.
     ///
-    /// If the current detent is invalid, the sheet will snap to first potential detent of `.natural` if the new potential detents are empty.
+    /// If the current detent is invalid, the sheet will snap to the first element of new detents or falls back to `.natural` if new detents are empty.
     ///
     /// - Parameter newValue: The potential detents where the sheet may naturally rests.
-    private func onDetentsChanged(_ newValue: Set<AccentPresentationDentent>) {
+    private func onDetentsChanged(_ newValue: [AccentPresentationDetent]) {
         // Saves the new value.
-        potentialDetents = newValue
+        detents = Set(newValue)
         // Determines whether the current detent is invalid.
         guard !newValue.contains(currentDetent) else { return }
-        // Snaps the current detent to the first value of the potential detents or falls back to the natural detent if empty.
+        // Snaps to the first available detent or falls back to `.natural` if the available detents are empty.
         currentDetent = newValue.first ?? .natural
+    }
+
+    /// Accepts a new value of configuration.
+    /// - Parameter newValue:
+    private func onConfigurationChanged(_ newValue: AccentPresentationConfiguration) {
+        configuration = newValue
     }
 
     // MARK: Utilities
@@ -107,14 +113,8 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
         // The container that takes all available space.
         ZStack {
             // The actual self-sizing sheet.
-            VStack(alignment: configuration.alignment, spacing: configuration.spacing) {
-                // The drag indicator is always center.
-                HStack {
-                    Spacer()
-                    dragIndicator
-                    Spacer()
-                }
-                // The content of the sheet.
+            VStack(spacing: configuration.spacing) {
+                dragIndicator
                 sheet()
             }
             .frame(maxWidth: .infinity)
@@ -123,22 +123,6 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
             // Take available space to align the other contents on top.
             Spacer()
         }
-    }
-
-    private var dragIndicatorSize: CGSize {
-        CGSize(width: 36, height: 5)
-    }
-
-    private var dragIndicatorEdgeInsets: EdgeInsets {
-        EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0)
-    }
-
-    /// A view that indicates the sheet can resize or dismiss interactively.
-    private var dragIndicator: some View {
-        Capsule()
-            .fill(Color.gray)
-            .frame(width: dragIndicatorSize.width, height: dragIndicatorSize.height)
-            .padding(dragIndicatorEdgeInsets)
     }
 
     private var dragGesture: some Gesture {
@@ -151,9 +135,9 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
             }
             .onEnded { (value: DragGesture.Value) in
                 // Calculates the predicted offset on drag gesture ended.
-                let predictedOffset = spacing + value.translation.height
-                // Determines the most matched detent with the predicted offset and it's different from the current detent.
-                guard let detent = potentialDetent(for: predictedOffset), currentDetent != detent else { return }
+                let offset = offset(for: currentDetent, with: value.translation)
+                // Determines the most matched detent with the predicted offset.
+                guard let detent = detent(for: offset) else { return }
                 // Snaps the sheet to potential detent.
                 currentDetent = detent
             }
@@ -176,15 +160,46 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
         }
     }
 
+    /// A transparent view to retrive the size of the sheet.
+    private func sizeReader(
+        size: Binding<CGSize>,
+        _ background: @escaping () -> some View =  { Color.clear }
+    ) -> some View {
+        GeometryReader { (geometry: GeometryProxy) in
+            background().onAppear {
+                size.wrappedValue = geometry.size
+            }
+        }
+    }
+
+    private var dragIndicatorSize: CGSize {
+        CGSize(width: 36, height: 5)
+    }
+
+    private var dragIndicatorEdgeInsets: EdgeInsets {
+        EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0)
+    }
+
+    /// A view that indicates the sheet can resize or dismiss interactively.
+    private var dragIndicator: some View {
+        Capsule()
+            .fill(Color.gray)
+            .frame(width: dragIndicatorSize.width, height: dragIndicatorSize.height)
+            .padding(dragIndicatorEdgeInsets)
+    }
+
     private var offset: CGSize {
-        CGSize(width: 0, height: spacing + translation.height)
+        offset(for: currentDetent, with: translation)
     }
 
-    private var spacing: CGFloat {
-        spacing(for: currentDetent)
+    private func offset(for detent: AccentPresentationDetent, with translation: CGSize) -> CGSize {
+        CGSize(
+            width: 0,
+            height: spacing(for: detent) + translation.height
+        )
     }
 
-    private func spacing(for detent: AccentPresentationDentent) -> CGFloat {
+    private func spacing(for detent: AccentPresentationDetent) -> CGFloat {
         switch detent {
         case .natural:
             return containerSize.height - sheetSize.height
@@ -199,40 +214,27 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
         }
     }
 
-    /// A collection whose value is the default spacing of the sheet for each potential presentation detent.
+    /// A collection whose value is the default spacing of the sheet for each available detent.
     ///
-    /// If more than one presentation detents have the same spacing, they will be filter from the result.
-    private var defaultSpacingPerDetent: [AccentPresentationDentent: CGFloat] {
-        potentialDetents.reduce(into: [:]) { (result: inout [AccentPresentationDentent: CGFloat], detent: AccentPresentationDentent) in
+    /// If more than one detents have the same spacing, they will be filter from the result.
+    private var spacingPerDetent: [AccentPresentationDetent: CGFloat] {
+        detents.reduce(into: [:]) { (result: inout [AccentPresentationDetent: CGFloat], detent: AccentPresentationDetent) in
             // Calculates the spacing for the this detent.
-            let candidate = spacing(for: detent)
+            let spacing = spacing(for: detent)
             // Determines the result dictionary doesn't have any element whose value is the same.
-            guard !result.values.contains(candidate) else { return }
+            guard !result.values.contains(spacing) else { return }
             // Appends the spacing to the result.
-            result[detent] = candidate
+            result[detent] = spacing
         }
     }
 
     /// Finds the most potential detent for a predicted offset of the sheet.
     /// - Parameter offset: A prediction, based on the drag gesture, of the amount to offset the sheet.
     /// - Returns: The most potential detent.
-    private func potentialDetent(for offset: CGFloat) -> AccentPresentationDentent? {
-        defaultSpacingPerDetent
-            .min { lhs, rhs in
-                abs(lhs.value - offset) < abs(rhs.value - offset)
-            }?.key
-    }
-
-    /// A transparent view to retrive the size of the sheet.
-    private func sizeReader(
-        size: Binding<CGSize>,
-        _ background: @escaping () -> some View =  { Color.clear }
-    ) -> some View {
-        GeometryReader { (geometry: GeometryProxy) in
-            background().onAppear {
-                size.wrappedValue = geometry.size
-            }
-        }
+    private func detent(for offset: CGSize) -> AccentPresentationDetent? {
+        spacingPerDetent.min { lhs, rhs in
+            abs(lhs.value - offset.height) < abs(rhs.value - offset.height)
+        }?.key
     }
 }
 
@@ -268,7 +270,7 @@ struct AccentSheet_Previews: PreviewProvider {
                         }
                     }
                     .listStyle(.plain)
-                    .accentPresentationDetents([.medium, .large])
+                    .accentPresentationDetents([.height(100), .medium, .large])
                 }
         }
     }

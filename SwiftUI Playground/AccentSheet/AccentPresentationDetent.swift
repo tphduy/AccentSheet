@@ -5,10 +5,10 @@
 //  Created by Duy Tran on 27/06/2023.
 //
 
-import Foundation
+import SwiftUI
 
 /// A type that represents a height where a sheet naturally rests.
-public enum AccentPresentationDentent: Hashable {
+public enum AccentPresentationDetent: Hashable {
     /// The system detent for a sheet that grows to its natural size based on its content.
     case natural
 
@@ -23,4 +23,14 @@ public enum AccentPresentationDentent: Hashable {
 
     /// A custom detent with the specified height.
     case height(_ height: CGFloat)
+}
+
+struct AccentPresentationDetentsKey: PreferenceKey {
+    static var defaultValue: [AccentPresentationDetent] {
+        [.natural]
+    }
+
+    static func reduce(value: inout [AccentPresentationDetent], nextValue: () -> [AccentPresentationDetent]) {
+        value = nextValue()
+    }
 }
