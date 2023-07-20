@@ -56,13 +56,12 @@ extension View {
     /// Requests that the shadow of presentation have a specific corner radius.
     /// - Parameter cornerRadius: The corner radius, or nil to use the system default. Specifying `0` to disable the shadow.
     func accentPresentationShadowCornerRadius(_ cornerRadius: CGFloat? = nil) -> some View {
-        preference(key: AccentPresentationShadowCornerRadiusKey.self, value: cornerRadius)
+        preference(key: AccentPresentationShadowCornerRadiusKey.self, value: cornerRadius ?? 8)
     }
 
-    /// Disables the shadow of presentation.
-    /// - Parameter isDisabled: A flag that indicates whether the shadow is disabled.
-    func accentPresentationShadowDisabled(_ isDisabled: Bool = true) -> some View {
-        preference(key: AccentPresentationShadowCornerRadiusKey.self, value: isDisabled ? 0 : 8)
+    /// Enables the shadow of presentation.
+    /// - Parameter isEnabled: A flag that indicates whether the shadow is enabled.
+    func accentPresentationShadowEnabled(_ isEnabled: Bool = true) -> some View {
+        preference(key: AccentPresentationShadowCornerRadiusKey.self, value: isEnabled ? 8 : 0)
     }
 }
-

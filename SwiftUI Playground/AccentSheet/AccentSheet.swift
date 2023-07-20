@@ -43,8 +43,8 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
 
     /// The corner radius of the shadow of the sheet, or nil to use the system default.
     ///
-    /// The default value is `8`.
-    @State private var shadowCornerRadius: CGFloat = 8
+    /// The default value is `0`.
+    @State private var shadowCornerRadius: CGFloat = 0
 
     /// The self-sizing size of the sheet.
     ///
@@ -142,7 +142,7 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
                         backgroundCornerRadius = newValue ?? 8
                     }
                     .onPreferenceChange(AccentPresentationShadowCornerRadiusKey.self) { newValue in
-                        shadowCornerRadius = newValue ?? 8
+                        shadowCornerRadius = newValue
                     }
                 }
             }
@@ -170,7 +170,7 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
     /// A dragging motion that resizes the sheet.
     private func dragGesture(in geometry: GeometryProxy) -> some Gesture {
         DragGesture()
-            .updating($translation) { (value: DragGesture.Value, state: inout CGSize, transaction: inout Transaction) in
+            .updating($translation) { (value: DragGesture.Value, state: inout CGSize, _: inout Transaction) in
                 // Saves the translatio to offset the sheet.
                 state = value.translation
                 // Not setting an animation to the `transaction` because it just animate while dragging.
@@ -188,7 +188,7 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
 
     /// A view is sandwiched between the presenting view and the sheet to pass through the gesture or dismiss when tapped.
     private var passthroughBackground: some View {
-        Color.black
+        Color(red: 0.93, green: 0.93, blue: 1)
             .opacity(0.2)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .edgesIgnoringSafeArea(.all)
