@@ -10,8 +10,13 @@ import SwiftUI
 struct ContentView: View {
     @State private var isPresented = false
 
+    @State private var isLoggedIn = false
+
     var body: some View {
-        Text("Content")
+        if #available(iOS 16.0, *) {
+            Button("Content") {
+                isPresented.toggle()
+            }
             .navigationTitle("Accent Sheet")
             .toolbar {
                 ToolbarItem {
@@ -21,14 +26,16 @@ struct ContentView: View {
                 }
             }
             .accentSheet(isPresented: $isPresented) {
-                VStack(spacing: 16) {
-                    Text("Lorem Ipsum")
-                        .font(.title)
-                    Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
-                }
-                .padding()
-                .accentPresentationDetents([.natural, .large])
+                LicenseAgreement()
+                    .padding()
+                    .accentPresentationDetents([.natural, .large])
             }
+//            .sheet(isPresented: $isPresented) {
+//                LicenseAgreement()
+//                    .padding()
+//                    .presentationDetents([.medium, .large])
+//            }
+        }
     }
 }
 

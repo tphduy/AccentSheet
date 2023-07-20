@@ -179,10 +179,18 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
             .onEnded { (value: DragGesture.Value) in
                 // Calculates the predicted offset on drag gesture ended.
                 let offset = offset(for: currentDetent, with: value.translation, in: geometry)
-                // Determines the most matched detent with the predicted offset.
-                guard let detent = detent(for: offset, in: geometry) else { return }
+                // Verifies the most potential detent with the predicted offset is some.
+                guard let potentialDetent = potentialDetent(for: offset, in: geometry) else { return }
                 // Snaps the sheet to potential detent.
-                currentDetent = detent
+                defer { currentDetent = potentialDetent }
+                // Verifies the interactive dismiss is enabled.
+                guard !isInteractiveDismissDisabled else { return }
+                // Verifies the translation reached the threshold to dismiss.
+                guard value.translation.height / geometry.size.height >= 0.2 else { return }
+                // Verifies the current detent is the shortest to dismiss.
+                guard currentDetent == shortestDetent(in: geometry) else { return }
+                // Dismisses the sheet.
+                isPresented = false
             }
     }
 
@@ -191,8 +199,9 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
         Color(red: 0.93, green: 0.93, blue: 1)
             .opacity(0.2)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .edgesIgnoringSafeArea(.all)
+            .ignoresSafeArea()
             .contentShape(Rectangle())
+            .allowsHitTesting(false)
     }
 
     /// A view that indicates the sheet can resize or dismiss interactively.
@@ -272,14 +281,23 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
         }
     }
 
-    /// Finds the most potential detent (the nearest) for a predicted offset of the sheet.
+    /// Returns the most potential detent (the nearest) for a predicted offset of the sheet.
     /// - Parameters:
     ///   - offset: A prediction, based on the drag gesture, of the amount to offset the sheet.
     ///   - geometry: A proxy for access to the size and coordinate space (for anchor resolution) of the container view.
-    /// - Returns: The nearest detent.
-    private func detent(for offset: CGSize, in geometry: GeometryProxy) -> AccentPresentationDetent? {
+    /// - Returns: A detent if the available detents are not empty.
+    private func potentialDetent(for offset: CGSize, in geometry: GeometryProxy) -> AccentPresentationDetent? {
         spacingPerDetent(in: geometry).min { lhs, rhs in
             abs(lhs.value - offset.height) < abs(rhs.value - offset.height)
+        }?.key
+    }
+
+    /// Returns a detent that reduces the height of the sheet to the shortest when snaps to it
+    /// - Parameter geometry: A proxy for access to the size and coordinate space (for anchor resolution) of the container view.
+    /// - Returns: A detent if the available detents are not empty.
+    private func shortestDetent(in geometry: GeometryProxy) -> AccentPresentationDetent? {
+        spacingPerDetent(in: geometry).max { lhs, rhs in
+            lhs.value < rhs.value
         }?.key
     }
 }
@@ -299,14 +317,9 @@ struct AccentSheet_Previews: PreviewProvider {
             Text("Content")
                 .navigationTitle("Accent Sheet")
                 .accentSheet(isPresented: .constant(true)) {
-                    VStack(spacing: 16) {
-                        Text("License Agreement")
-                            .font(.title)
-                        Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
-                        Button("Dismiss") {}
-                    }
-                    .padding()
-                    .accentPresentationDetents([.natural, .large])
+                    LicenseAgreement()
+                        .padding()
+                        .accentPresentationDetents([.natural, .large])
                 }
         }
     }
@@ -316,15 +329,8 @@ struct AccentSheet_Previews: PreviewProvider {
             Text("Content")
                 .navigationTitle("Accent Sheet")
                 .accentSheet(isPresented: .constant(true)) {
-                    VStack {
-                        Text("Header")
-                            .font(.title)
-                        List(0...100, id: \.self) { (number: Int) in
-                            Text("\(number)")
-                        }
-                        .listStyle(.plain)
-                    }
-                    .accentPresentationDetents([.fraction(0.2), .medium, .large])
+                    Numbers()
+                        .accentPresentationDetents([.fraction(0.2), .medium, .large])
                 }
         }
     }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D10956F2A697BDD0063D267 /* LicenseAgreement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D10956E2A697BDD0063D267 /* LicenseAgreement.swift */; };
+		3D1095712A697C080063D267 /* Numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1095702A697C080063D267 /* Numbers.swift */; };
 		3D152A392A67E51900615066 /* AccentVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D152A382A67E51900615066 /* AccentVisibility.swift */; };
 		3D2EC10C2A45A213009A2623 /* PickupPointMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2EC10B2A45A213009A2623 /* PickupPointMap.swift */; };
 		3D2EC10E2A45A220009A2623 /* PickupPointMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2EC10D2A45A220009A2623 /* PickupPointMapViewModel.swift */; };
@@ -50,6 +52,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3D10956E2A697BDD0063D267 /* LicenseAgreement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseAgreement.swift; sourceTree = "<group>"; };
+		3D1095702A697C080063D267 /* Numbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Numbers.swift; sourceTree = "<group>"; };
 		3D152A382A67E51900615066 /* AccentVisibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentVisibility.swift; sourceTree = "<group>"; };
 		3D2EC10B2A45A213009A2623 /* PickupPointMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupPointMap.swift; sourceTree = "<group>"; };
 		3D2EC10D2A45A220009A2623 /* PickupPointMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupPointMapViewModel.swift; sourceTree = "<group>"; };
@@ -125,6 +129,8 @@
 			isa = PBXGroup;
 			children = (
 				3D9AD3DE2A5D051C00EB7A47 /* ContentView.swift */,
+				3D10956E2A697BDD0063D267 /* LicenseAgreement.swift */,
+				3D1095702A697C080063D267 /* Numbers.swift */,
 			);
 			path = Discardable;
 			sourceTree = "<group>";
@@ -346,10 +352,12 @@
 				3DB057582A684CF70025625A /* AccentPresentationCornerRadius.swift in Sources */,
 				3DE5703A2A4582470068A84F /* PickupPoint.swift in Sources */,
 				3D2EC10C2A45A213009A2623 /* PickupPointMap.swift in Sources */,
+				3D10956F2A697BDD0063D267 /* LicenseAgreement.swift in Sources */,
 				3DB057622A685F0E0025625A /* AccentPresentationShadowCornerRadiusKeyAccentPresentationShadowCornerRadiusKey.swift in Sources */,
 				3D152A392A67E51900615066 /* AccentVisibility.swift in Sources */,
 				3DC871BF2A1F5C9000C219B2 /* SwiftUI_PlaygroundApp.swift in Sources */,
 				3DB0575C2A684DC50025625A /* AccentPresentationDetentsKey.swift in Sources */,
+				3D1095712A697C080063D267 /* Numbers.swift in Sources */,
 				3DE570412A4591F60068A84F /* Loadable.swift in Sources */,
 				3DB0575E2A684DED0025625A /* AccentPresentationDragIndicatorKey.swift in Sources */,
 				3D9AD3DF2A5D051C00EB7A47 /* ContentView.swift in Sources */,
