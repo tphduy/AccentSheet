@@ -50,7 +50,7 @@ extension View {
     /// Requests that the presentation have a specific corner radius.
     /// - Parameter cornerRadius: The corner radius, or nil to use the system default.
     func bottomSheetPresentationCornerRadius(_ cornerRadius: CGFloat? = nil) -> some View {
-        preference(key: BottomSheetPresentationCornerRadiusKey.self, value: cornerRadius)
+        preference(key: BottomSheetPresentationCornerRadiusKey.self, value: cornerRadius ?? 8)
     }
 
     /// Requests that the shadow of presentation have a specific corner radius.

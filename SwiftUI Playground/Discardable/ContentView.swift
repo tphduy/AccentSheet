@@ -7,8 +7,9 @@
 
 import SwiftUI
 
+
 struct ContentView: View {
-    @State private var isPresented = false
+    @State private var isPresented = true
 
     @State private var isAuthorized = false
 
@@ -31,29 +32,21 @@ struct ContentView: View {
                         )
                     }
                 }
-                .bottomSheet(isPresented: $isPresented) {
-                    if isAuthorized {
-                        Numbers()
-                            .bottomSheetPresentationDetents([.fraction(0.2), .medium, .large])
-                            .bottomSheetPresentationCornerRadius(0)
-                    } else {
-                        LicenseAgreement(onAgree: {
-                            isAuthorized = true
-                        })
-                        .padding()
-                        .bottomSheetPresentationDetents([.natural])
-                        .bottomSheetPresentationShadowEnabled()
-                        .bottomSheetInteractiveDismissDisabled()
-                    }
-                }
-//                .sheet(isPresented: $isPresented) {
-//                    LicenseAgreement(onAgree: {
-//                        isAuthorized = true
-//                    })
-//                    .padding()
-//                    .presentationDetents([.medium, .large])
-//                }
+                .bottomSheet(isPresented: $isPresented, content: sheetContent)
         }
+    }
+
+    private func sheetContent() -> some View {
+        LicenseAgreement(onAgree: {
+            isAuthorized = true
+        })
+        .padding()
+        .bottomSheetPresentationDetents([.natural, .medium, .large])
+        .bottomSheetInteractiveDismissDisabled()
+        .bottomSheetPresentationDragIndicator()
+        .bottomSheetPresentationCornerRadius(16)
+        .bottomSheetPresentationShadowCornerRadius()
+        .bottomSheetPresentationPassthroughBackgroundDisabled()
     }
 }
 

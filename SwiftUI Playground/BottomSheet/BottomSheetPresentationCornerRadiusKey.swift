@@ -9,11 +9,11 @@ import SwiftUI
 
 /// A named value to configure the corner radius of the bottom sheet.
 struct BottomSheetPresentationCornerRadiusKey: PreferenceKey {
-    static var defaultValue: CGFloat? {
-        nil
+    static var defaultValue: CGFloat {
+        0
     }
 
-    static func reduce(value: inout CGFloat?, nextValue: () -> CGFloat?) {
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
         value = nextValue()
     }
 }

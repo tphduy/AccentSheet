@@ -38,8 +38,8 @@ struct BottomSheet<Sheet>: ViewModifier where Sheet: View {
 
     /// The corner radius of the background of the sheet, or nil to use the system default.
     ///
-    /// The default value is `8`.
-    @State private var backgroundCornerRadius: CGFloat = 8
+    /// The default value is `0`.
+    @State private var backgroundCornerRadius: CGFloat = 0
 
     /// The corner radius of the shadow of the sheet, or nil to use the system default.
     ///
@@ -139,7 +139,7 @@ struct BottomSheet<Sheet>: ViewModifier where Sheet: View {
                         dragIndicatorVisibility = newValue
                     }
                     .onPreferenceChange(BottomSheetPresentationCornerRadiusKey.self) { newValue in
-                        backgroundCornerRadius = newValue ?? 8
+                        backgroundCornerRadius = newValue
                     }
                     .onPreferenceChange(BottomSheetPresentationShadowCornerRadiusKey.self) { newValue in
                         shadowCornerRadius = newValue
@@ -201,7 +201,9 @@ struct BottomSheet<Sheet>: ViewModifier where Sheet: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea()
             .contentShape(Rectangle())
-            .allowsHitTesting(false)
+            .onTapGesture {
+                isPresented = false
+            }
     }
 
     /// A view that indicates the sheet can resize or dismiss interactively.
