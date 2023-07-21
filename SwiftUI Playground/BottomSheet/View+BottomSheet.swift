@@ -24,7 +24,7 @@ extension View {
     /// If the new detents don't containt the current detent, the bottom sheet will snap to the first element of new detents or falls back to `.natural` if new detents are empty.
     ///
     /// - Parameters:
-    ///   - detents: A list of supported detents for the sheet. If you provide more that one detent, people can drag the sheet to resize it.
+    ///   - detents: A list of supported detents for the sheet. If you provide more than one detent, people can drag the sheet to resize it.
     func bottomSheetPresentationDetents(_ detents: [BottomSheetPresentationDetent] = [.natural]) -> some View {
         preference(key: BottomSheetPresentationDetentsKey.self, value: detents)
     }

@@ -21,7 +21,7 @@
 		3DB0575C2A684DC50025625A /* BottomSheetPresentationDetentsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB0575B2A684DC50025625A /* BottomSheetPresentationDetentsKey.swift */; };
 		3DB0575E2A684DED0025625A /* BottomSheetPresentationDragIndicatorKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB0575D2A684DED0025625A /* BottomSheetPresentationDragIndicatorKey.swift */; };
 		3DB057602A684F730025625A /* BottomSheetPresentationPassthroughBackgroundDisabledKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB0575F2A684F730025625A /* BottomSheetPresentationPassthroughBackgroundDisabledKey.swift */; };
-		3DB057622A685F0E0025625A /* AccentPresentationShadowCornerRadiusKeyAccentPresentationShadowCornerRadiusKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB057612A685F0E0025625A /* AccentPresentationShadowCornerRadiusKeyAccentPresentationShadowCornerRadiusKey.swift */; };
+		3DB057622A685F0E0025625A /* BottomSheetPresentationShadowCornerRadiusKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB057612A685F0E0025625A /* BottomSheetPresentationShadowCornerRadiusKey.swift */; };
 		3DC871BF2A1F5C9000C219B2 /* SwiftUI_PlaygroundApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC871BE2A1F5C9000C219B2 /* SwiftUI_PlaygroundApp.swift */; };
 		3DC871C32A1F5C9100C219B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DC871C22A1F5C9100C219B2 /* Assets.xcassets */; };
 		3DC871C72A1F5C9100C219B2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DC871C62A1F5C9100C219B2 /* Preview Assets.xcassets */; };
@@ -66,7 +66,7 @@
 		3DB0575B2A684DC50025625A /* BottomSheetPresentationDetentsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetPresentationDetentsKey.swift; sourceTree = "<group>"; };
 		3DB0575D2A684DED0025625A /* BottomSheetPresentationDragIndicatorKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetPresentationDragIndicatorKey.swift; sourceTree = "<group>"; };
 		3DB0575F2A684F730025625A /* BottomSheetPresentationPassthroughBackgroundDisabledKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetPresentationPassthroughBackgroundDisabledKey.swift; sourceTree = "<group>"; };
-		3DB057612A685F0E0025625A /* AccentPresentationShadowCornerRadiusKeyAccentPresentationShadowCornerRadiusKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentPresentationShadowCornerRadiusKeyAccentPresentationShadowCornerRadiusKey.swift; sourceTree = "<group>"; };
+		3DB057612A685F0E0025625A /* BottomSheetPresentationShadowCornerRadiusKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetPresentationShadowCornerRadiusKey.swift; sourceTree = "<group>"; };
 		3DC871BB2A1F5C9000C219B2 /* SwiftUI Playground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftUI Playground.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DC871BE2A1F5C9000C219B2 /* SwiftUI_PlaygroundApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI_PlaygroundApp.swift; sourceTree = "<group>"; };
 		3DC871C22A1F5C9100C219B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -111,15 +111,15 @@
 		3D10AEDD2A4A96EB00BFB1EB /* BottomSheet */ = {
 			isa = PBXGroup;
 			children = (
+				3DA065402A49ECAB00FA4DE1 /* BottomSheet.swift */,
 				3DB057592A684D550025625A /* BottomSheetInteractiveDismissDisabledKey.swift */,
 				3DB057572A684CF70025625A /* BottomSheetPresentationCornerRadiusKey.swift */,
 				3D37CEE02A66639600F674FE /* BottomSheetPresentationDetent.swift */,
 				3DB0575B2A684DC50025625A /* BottomSheetPresentationDetentsKey.swift */,
 				3DB0575D2A684DED0025625A /* BottomSheetPresentationDragIndicatorKey.swift */,
 				3DB0575F2A684F730025625A /* BottomSheetPresentationPassthroughBackgroundDisabledKey.swift */,
-				3DB057612A685F0E0025625A /* AccentPresentationShadowCornerRadiusKeyAccentPresentationShadowCornerRadiusKey.swift */,
+				3DB057612A685F0E0025625A /* BottomSheetPresentationShadowCornerRadiusKey.swift */,
 				3D152A382A67E51900615066 /* BottomSheetVisibility.swift */,
-				3DA065402A49ECAB00FA4DE1 /* BottomSheet.swift */,
 				3D5398A12A4D625400FC71F3 /* View+BottomSheet.swift */,
 			);
 			path = BottomSheet;
@@ -353,7 +353,7 @@
 				3DE5703A2A4582470068A84F /* PickupPoint.swift in Sources */,
 				3D2EC10C2A45A213009A2623 /* PickupPointMap.swift in Sources */,
 				3D10956F2A697BDD0063D267 /* LicenseAgreement.swift in Sources */,
-				3DB057622A685F0E0025625A /* AccentPresentationShadowCornerRadiusKeyAccentPresentationShadowCornerRadiusKey.swift in Sources */,
+				3DB057622A685F0E0025625A /* BottomSheetPresentationShadowCornerRadiusKey.swift in Sources */,
 				3D152A392A67E51900615066 /* BottomSheetVisibility.swift in Sources */,
 				3DC871BF2A1F5C9000C219B2 /* SwiftUI_PlaygroundApp.swift in Sources */,
 				3DB0575C2A684DC50025625A /* BottomSheetPresentationDetentsKey.swift in Sources */,
