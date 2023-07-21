@@ -10,31 +10,49 @@ import SwiftUI
 struct ContentView: View {
     @State private var isPresented = false
 
-    @State private var isLoggedIn = false
+    @State private var isAuthorized = false
 
     var body: some View {
         if #available(iOS 16.0, *) {
-            Button("Content") {
-                isPresented.toggle()
-            }
-            .navigationTitle("Accent Sheet")
-            .toolbar {
-                ToolbarItem {
-                    Button("Toggle") {
-                        isPresented.toggle()
+            Text("Content")
+                .navigationTitle("Bottom Sheet")
+                .toolbar {
+                    ToolbarItem {
+                        Toggle(
+                            isPresented ? "Hide" : "Show",
+                            isOn: $isPresented
+                        )
+                    }
+
+                    ToolbarItem {
+                        Toggle(
+                            isAuthorized ? "Deny License" : "Accept License",
+                            isOn: $isAuthorized
+                        )
                     }
                 }
-            }
-            .accentSheet(isPresented: $isPresented) {
-                LicenseAgreement()
-                    .padding()
-                    .accentPresentationDetents([.natural, .large])
-            }
-//            .sheet(isPresented: $isPresented) {
-//                LicenseAgreement()
+                .bottomSheet(isPresented: $isPresented) {
+                    if isAuthorized {
+                        Numbers()
+                            .bottomSheetPresentationDetents([.fraction(0.2), .medium, .large])
+                            .bottomSheetPresentationCornerRadius(0)
+                    } else {
+                        LicenseAgreement(onAgree: {
+                            isAuthorized = true
+                        })
+                        .padding()
+                        .bottomSheetPresentationDetents([.natural])
+                        .bottomSheetPresentationShadowEnabled()
+                        .bottomSheetInteractiveDismissDisabled()
+                    }
+                }
+//                .sheet(isPresented: $isPresented) {
+//                    LicenseAgreement(onAgree: {
+//                        isAuthorized = true
+//                    })
 //                    .padding()
 //                    .presentationDetents([.medium, .large])
-//            }
+//                }
         }
     }
 }

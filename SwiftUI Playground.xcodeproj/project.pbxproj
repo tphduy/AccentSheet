@@ -9,18 +9,18 @@
 /* Begin PBXBuildFile section */
 		3D10956F2A697BDD0063D267 /* LicenseAgreement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D10956E2A697BDD0063D267 /* LicenseAgreement.swift */; };
 		3D1095712A697C080063D267 /* Numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1095702A697C080063D267 /* Numbers.swift */; };
-		3D152A392A67E51900615066 /* AccentVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D152A382A67E51900615066 /* AccentVisibility.swift */; };
+		3D152A392A67E51900615066 /* BottomSheetVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D152A382A67E51900615066 /* BottomSheetVisibility.swift */; };
 		3D2EC10C2A45A213009A2623 /* PickupPointMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2EC10B2A45A213009A2623 /* PickupPointMap.swift */; };
 		3D2EC10E2A45A220009A2623 /* PickupPointMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2EC10D2A45A220009A2623 /* PickupPointMapViewModel.swift */; };
-		3D37CEE12A66639600F674FE /* AccentPresentationDetent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D37CEE02A66639600F674FE /* AccentPresentationDetent.swift */; };
-		3D5398A22A4D625400FC71F3 /* View+AccentSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5398A12A4D625400FC71F3 /* View+AccentSheet.swift */; };
+		3D37CEE12A66639600F674FE /* BottomSheetPresentationDetent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D37CEE02A66639600F674FE /* BottomSheetPresentationDetent.swift */; };
+		3D5398A22A4D625400FC71F3 /* View+BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5398A12A4D625400FC71F3 /* View+BottomSheet.swift */; };
 		3D9AD3DF2A5D051C00EB7A47 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9AD3DE2A5D051C00EB7A47 /* ContentView.swift */; };
-		3DA065412A49ECAB00FA4DE1 /* AccentSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA065402A49ECAB00FA4DE1 /* AccentSheet.swift */; };
-		3DB057582A684CF70025625A /* AccentPresentationCornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB057572A684CF70025625A /* AccentPresentationCornerRadius.swift */; };
-		3DB0575A2A684D550025625A /* AccentInteractiveDismissDisabledKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB057592A684D550025625A /* AccentInteractiveDismissDisabledKey.swift */; };
-		3DB0575C2A684DC50025625A /* AccentPresentationDetentsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB0575B2A684DC50025625A /* AccentPresentationDetentsKey.swift */; };
-		3DB0575E2A684DED0025625A /* AccentPresentationDragIndicatorKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB0575D2A684DED0025625A /* AccentPresentationDragIndicatorKey.swift */; };
-		3DB057602A684F730025625A /* AccentPresentationPassthroughBackgroundDisabledKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB0575F2A684F730025625A /* AccentPresentationPassthroughBackgroundDisabledKey.swift */; };
+		3DA065412A49ECAB00FA4DE1 /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA065402A49ECAB00FA4DE1 /* BottomSheet.swift */; };
+		3DB057582A684CF70025625A /* BottomSheetPresentationCornerRadiusKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB057572A684CF70025625A /* BottomSheetPresentationCornerRadiusKey.swift */; };
+		3DB0575A2A684D550025625A /* BottomSheetInteractiveDismissDisabledKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB057592A684D550025625A /* BottomSheetInteractiveDismissDisabledKey.swift */; };
+		3DB0575C2A684DC50025625A /* BottomSheetPresentationDetentsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB0575B2A684DC50025625A /* BottomSheetPresentationDetentsKey.swift */; };
+		3DB0575E2A684DED0025625A /* BottomSheetPresentationDragIndicatorKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB0575D2A684DED0025625A /* BottomSheetPresentationDragIndicatorKey.swift */; };
+		3DB057602A684F730025625A /* BottomSheetPresentationPassthroughBackgroundDisabledKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB0575F2A684F730025625A /* BottomSheetPresentationPassthroughBackgroundDisabledKey.swift */; };
 		3DB057622A685F0E0025625A /* AccentPresentationShadowCornerRadiusKeyAccentPresentationShadowCornerRadiusKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB057612A685F0E0025625A /* AccentPresentationShadowCornerRadiusKeyAccentPresentationShadowCornerRadiusKey.swift */; };
 		3DC871BF2A1F5C9000C219B2 /* SwiftUI_PlaygroundApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC871BE2A1F5C9000C219B2 /* SwiftUI_PlaygroundApp.swift */; };
 		3DC871C32A1F5C9100C219B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DC871C22A1F5C9100C219B2 /* Assets.xcassets */; };
@@ -54,18 +54,18 @@
 /* Begin PBXFileReference section */
 		3D10956E2A697BDD0063D267 /* LicenseAgreement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseAgreement.swift; sourceTree = "<group>"; };
 		3D1095702A697C080063D267 /* Numbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Numbers.swift; sourceTree = "<group>"; };
-		3D152A382A67E51900615066 /* AccentVisibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentVisibility.swift; sourceTree = "<group>"; };
+		3D152A382A67E51900615066 /* BottomSheetVisibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetVisibility.swift; sourceTree = "<group>"; };
 		3D2EC10B2A45A213009A2623 /* PickupPointMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupPointMap.swift; sourceTree = "<group>"; };
 		3D2EC10D2A45A220009A2623 /* PickupPointMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupPointMapViewModel.swift; sourceTree = "<group>"; };
-		3D37CEE02A66639600F674FE /* AccentPresentationDetent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccentPresentationDetent.swift; sourceTree = "<group>"; };
-		3D5398A12A4D625400FC71F3 /* View+AccentSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+AccentSheet.swift"; sourceTree = "<group>"; };
+		3D37CEE02A66639600F674FE /* BottomSheetPresentationDetent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomSheetPresentationDetent.swift; sourceTree = "<group>"; };
+		3D5398A12A4D625400FC71F3 /* View+BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+BottomSheet.swift"; sourceTree = "<group>"; };
 		3D9AD3DE2A5D051C00EB7A47 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		3DA065402A49ECAB00FA4DE1 /* AccentSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentSheet.swift; sourceTree = "<group>"; };
-		3DB057572A684CF70025625A /* AccentPresentationCornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentPresentationCornerRadius.swift; sourceTree = "<group>"; };
-		3DB057592A684D550025625A /* AccentInteractiveDismissDisabledKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentInteractiveDismissDisabledKey.swift; sourceTree = "<group>"; };
-		3DB0575B2A684DC50025625A /* AccentPresentationDetentsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentPresentationDetentsKey.swift; sourceTree = "<group>"; };
-		3DB0575D2A684DED0025625A /* AccentPresentationDragIndicatorKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentPresentationDragIndicatorKey.swift; sourceTree = "<group>"; };
-		3DB0575F2A684F730025625A /* AccentPresentationPassthroughBackgroundDisabledKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentPresentationPassthroughBackgroundDisabledKey.swift; sourceTree = "<group>"; };
+		3DA065402A49ECAB00FA4DE1 /* BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
+		3DB057572A684CF70025625A /* BottomSheetPresentationCornerRadiusKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetPresentationCornerRadiusKey.swift; sourceTree = "<group>"; };
+		3DB057592A684D550025625A /* BottomSheetInteractiveDismissDisabledKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetInteractiveDismissDisabledKey.swift; sourceTree = "<group>"; };
+		3DB0575B2A684DC50025625A /* BottomSheetPresentationDetentsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetPresentationDetentsKey.swift; sourceTree = "<group>"; };
+		3DB0575D2A684DED0025625A /* BottomSheetPresentationDragIndicatorKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetPresentationDragIndicatorKey.swift; sourceTree = "<group>"; };
+		3DB0575F2A684F730025625A /* BottomSheetPresentationPassthroughBackgroundDisabledKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetPresentationPassthroughBackgroundDisabledKey.swift; sourceTree = "<group>"; };
 		3DB057612A685F0E0025625A /* AccentPresentationShadowCornerRadiusKeyAccentPresentationShadowCornerRadiusKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentPresentationShadowCornerRadiusKeyAccentPresentationShadowCornerRadiusKey.swift; sourceTree = "<group>"; };
 		3DC871BB2A1F5C9000C219B2 /* SwiftUI Playground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftUI Playground.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DC871BE2A1F5C9000C219B2 /* SwiftUI_PlaygroundApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI_PlaygroundApp.swift; sourceTree = "<group>"; };
@@ -108,21 +108,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3D10AEDD2A4A96EB00BFB1EB /* AccentSheet */ = {
+		3D10AEDD2A4A96EB00BFB1EB /* BottomSheet */ = {
 			isa = PBXGroup;
 			children = (
-				3DB057592A684D550025625A /* AccentInteractiveDismissDisabledKey.swift */,
-				3DB057572A684CF70025625A /* AccentPresentationCornerRadius.swift */,
-				3D37CEE02A66639600F674FE /* AccentPresentationDetent.swift */,
-				3DB0575B2A684DC50025625A /* AccentPresentationDetentsKey.swift */,
-				3DB0575D2A684DED0025625A /* AccentPresentationDragIndicatorKey.swift */,
-				3DB0575F2A684F730025625A /* AccentPresentationPassthroughBackgroundDisabledKey.swift */,
-				3DA065402A49ECAB00FA4DE1 /* AccentSheet.swift */,
-				3D152A382A67E51900615066 /* AccentVisibility.swift */,
-				3D5398A12A4D625400FC71F3 /* View+AccentSheet.swift */,
+				3DB057592A684D550025625A /* BottomSheetInteractiveDismissDisabledKey.swift */,
+				3DB057572A684CF70025625A /* BottomSheetPresentationCornerRadiusKey.swift */,
+				3D37CEE02A66639600F674FE /* BottomSheetPresentationDetent.swift */,
+				3DB0575B2A684DC50025625A /* BottomSheetPresentationDetentsKey.swift */,
+				3DB0575D2A684DED0025625A /* BottomSheetPresentationDragIndicatorKey.swift */,
+				3DB0575F2A684F730025625A /* BottomSheetPresentationPassthroughBackgroundDisabledKey.swift */,
 				3DB057612A685F0E0025625A /* AccentPresentationShadowCornerRadiusKeyAccentPresentationShadowCornerRadiusKey.swift */,
+				3D152A382A67E51900615066 /* BottomSheetVisibility.swift */,
+				3DA065402A49ECAB00FA4DE1 /* BottomSheet.swift */,
+				3D5398A12A4D625400FC71F3 /* View+BottomSheet.swift */,
 			);
-			path = AccentSheet;
+			path = BottomSheet;
 			sourceTree = "<group>";
 		};
 		3DB35CC42A53D72800451184 /* Discardable */ = {
@@ -159,7 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				3DB35CC42A53D72800451184 /* Discardable */,
-				3D10AEDD2A4A96EB00BFB1EB /* AccentSheet */,
+				3D10AEDD2A4A96EB00BFB1EB /* BottomSheet */,
 				3DE5703F2A4582C30068A84F /* PickupPointPicker */,
 				3DE570382A4582280068A84F /* Dependencies */,
 				3DC871BE2A1F5C9000C219B2 /* SwiftUI_PlaygroundApp.swift */,
@@ -346,25 +346,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DE5703C2A4582770068A84F /* PickupPointPickerV2.swift in Sources */,
-				3DB0575A2A684D550025625A /* AccentInteractiveDismissDisabledKey.swift in Sources */,
+				3DB0575A2A684D550025625A /* BottomSheetInteractiveDismissDisabledKey.swift in Sources */,
 				3DE5703E2A4582BD0068A84F /* PickupPointPickerViewModelV2.swift in Sources */,
 				3D2EC10E2A45A220009A2623 /* PickupPointMapViewModel.swift in Sources */,
-				3DB057582A684CF70025625A /* AccentPresentationCornerRadius.swift in Sources */,
+				3DB057582A684CF70025625A /* BottomSheetPresentationCornerRadiusKey.swift in Sources */,
 				3DE5703A2A4582470068A84F /* PickupPoint.swift in Sources */,
 				3D2EC10C2A45A213009A2623 /* PickupPointMap.swift in Sources */,
 				3D10956F2A697BDD0063D267 /* LicenseAgreement.swift in Sources */,
 				3DB057622A685F0E0025625A /* AccentPresentationShadowCornerRadiusKeyAccentPresentationShadowCornerRadiusKey.swift in Sources */,
-				3D152A392A67E51900615066 /* AccentVisibility.swift in Sources */,
+				3D152A392A67E51900615066 /* BottomSheetVisibility.swift in Sources */,
 				3DC871BF2A1F5C9000C219B2 /* SwiftUI_PlaygroundApp.swift in Sources */,
-				3DB0575C2A684DC50025625A /* AccentPresentationDetentsKey.swift in Sources */,
+				3DB0575C2A684DC50025625A /* BottomSheetPresentationDetentsKey.swift in Sources */,
 				3D1095712A697C080063D267 /* Numbers.swift in Sources */,
 				3DE570412A4591F60068A84F /* Loadable.swift in Sources */,
-				3DB0575E2A684DED0025625A /* AccentPresentationDragIndicatorKey.swift in Sources */,
+				3DB0575E2A684DED0025625A /* BottomSheetPresentationDragIndicatorKey.swift in Sources */,
 				3D9AD3DF2A5D051C00EB7A47 /* ContentView.swift in Sources */,
-				3D5398A22A4D625400FC71F3 /* View+AccentSheet.swift in Sources */,
-				3DA065412A49ECAB00FA4DE1 /* AccentSheet.swift in Sources */,
-				3D37CEE12A66639600F674FE /* AccentPresentationDetent.swift in Sources */,
-				3DB057602A684F730025625A /* AccentPresentationPassthroughBackgroundDisabledKey.swift in Sources */,
+				3D5398A22A4D625400FC71F3 /* View+BottomSheet.swift in Sources */,
+				3DA065412A49ECAB00FA4DE1 /* BottomSheet.swift in Sources */,
+				3D37CEE12A66639600F674FE /* BottomSheetPresentationDetent.swift in Sources */,
+				3DB057602A684F730025625A /* BottomSheetPresentationPassthroughBackgroundDisabledKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

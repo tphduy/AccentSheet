@@ -1,27 +1,27 @@
 //
-//  AccentSheet.swift
-//  SwiftUI Playground
+//  BottomSheet.swift
+//  Vestiaire Collective
 //
 //  Created by Duy Tran on 26/06/2023.
 //
 
 import SwiftUI
 
-/// A modifier that overlays the original view with a sheet.
-struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
+/// A modifier that overlays the original view with a bottom sheet.
+struct BottomSheet<Sheet>: ViewModifier where Sheet: View {
     // MARK: States
 
     /// The curent detent where the sheet naturally rests.
     ///
     /// The default value is `.natural`.
-    @State private var currentDetent: AccentPresentationDetent = .natural
+    @State private var currentDetent: BottomSheetPresentationDetent = .natural
 
-    /// The potential detents where the sheet may naturally rests.
+    /// The available detents where the sheet may naturally rests.
     ///
     /// The default value is `[.natural]`.
-    @State private var detents: Set<AccentPresentationDetent> = Set([.natural])
+    @State private var detents: Set<BottomSheetPresentationDetent> = Set([.natural])
 
-    /// A flag that indicates whether to prevent nonprogrammatic dismissal of the containing view hierarchy when presented in an accent sheet or popover.
+    /// A flag that indicates whether to prevent nonprogrammatic dismissal of the containing view hierarchy when presented in a bottom sheet or popover.
     ///
     /// The default value is `false`.
     @State private var isInteractiveDismissDisabled: Bool = false
@@ -34,7 +34,7 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
     /// The preferred visibility of the drag indicator.
     ///
     /// The default value is `.automatic`.
-    @State private var dragIndicatorVisibility: AccentVisibility = .automatic
+    @State private var dragIndicatorVisibility: BottomSheetVisibility = .automatic
 
     /// The corner radius of the background of the sheet, or nil to use the system default.
     ///
@@ -128,20 +128,20 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
                     .gesture(dragGesture(in: geometry))
                     .animation(.spring(), value: offset)
                     .transition(.move(edge: .bottom))
-                    .onPreferenceChange(AccentPresentationDetentsKey.self, perform: onDetentsChanged(_:))
-                    .onPreferenceChange(AccentInteractiveDismissDisabledKey.self) { newValue in
+                    .onPreferenceChange(BottomSheetPresentationDetentsKey.self, perform: onDetentsChanged(_:))
+                    .onPreferenceChange(BottomSheetInteractiveDismissDisabledKey.self) { newValue in
                         isInteractiveDismissDisabled = newValue
                     }
-                    .onPreferenceChange(AccentPresentationPassthroughBackgroundDisabledKey.self) { newValue in
+                    .onPreferenceChange(BottomSheetPresentationPassthroughBackgroundDisabledKey.self) { newValue in
                         isPassthroughBackgroundDisabled = newValue
                     }
-                    .onPreferenceChange(AccentPresentationDragIndicatorKey.self) { newValue in
+                    .onPreferenceChange(BottomSheetPresentationDragIndicatorKey.self) { newValue in
                         dragIndicatorVisibility = newValue
                     }
-                    .onPreferenceChange(AccentPresentationCornerRadiusKey.self) { newValue in
+                    .onPreferenceChange(BottomSheetPresentationCornerRadiusKey.self) { newValue in
                         backgroundCornerRadius = newValue ?? 8
                     }
-                    .onPreferenceChange(AccentPresentationShadowCornerRadiusKey.self) { newValue in
+                    .onPreferenceChange(BottomSheetPresentationShadowCornerRadiusKey.self) { newValue in
                         shadowCornerRadius = newValue
                     }
                 }
@@ -156,7 +156,7 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
     /// If the current detent is invalid, the sheet will snap to the first element of new detents or falls back to `.natural` if new detents are empty.
     ///
     /// - Parameter newValue: The available detents where the sheet may naturally rests.
-    private func onDetentsChanged(_ newValue: [AccentPresentationDetent]) {
+    private func onDetentsChanged(_ newValue: [BottomSheetPresentationDetent]) {
         // Saves the new value.
         detents = Set(newValue)
         // Determines whether the current detent is invalid.
@@ -236,7 +236,7 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
     ///   - geometry: A proxy for access to the size and coordinate space (for anchor resolution) of the container view.
     /// - Returns: A size whose the amount of width is always `0`, height is the combination of the spacing of a detent with the translation of a drag gesture.
     private func offset(
-        for detent: AccentPresentationDetent,
+        for detent: BottomSheetPresentationDetent,
         with translation: CGSize,
         in geometry: GeometryProxy
     ) -> CGSize {
@@ -251,7 +251,7 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
     ///   - detent: A type that represents a height where a sheet naturally rests.
     ///   - geometry: A proxy for access to the size and coordinate space (for anchor resolution) of the container view.
     /// - Returns: The spacing from top of the sheet.
-    private func spacing(for detent: AccentPresentationDetent, in geometry: GeometryProxy) -> CGFloat {
+    private func spacing(for detent: BottomSheetPresentationDetent, in geometry: GeometryProxy) -> CGFloat {
         let available = geometry.size.height - geometry.safeAreaInsets.bottom
         switch detent {
         case .natural:
@@ -270,8 +270,8 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
     /// A collection whose value is the spacing without translation of the sheet for each available detent.
     ///
     /// If more than one detents have the same spacing, they will be filter from the result.
-    private func spacingPerDetent(in geometry: GeometryProxy) -> [AccentPresentationDetent: CGFloat] {
-        detents.reduce(into: [:]) { (result: inout [AccentPresentationDetent: CGFloat], detent: AccentPresentationDetent) in
+    private func spacingPerDetent(in geometry: GeometryProxy) -> [BottomSheetPresentationDetent: CGFloat] {
+        detents.reduce(into: [:]) { (result: inout [BottomSheetPresentationDetent: CGFloat], detent: BottomSheetPresentationDetent) in
             // Calculates the spacing for the this detent.
             let spacing = spacing(for: detent, in: geometry)
             // Determines the result dictionary doesn't have any element whose value is the same.
@@ -286,7 +286,7 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
     ///   - offset: A prediction, based on the drag gesture, of the amount to offset the sheet.
     ///   - geometry: A proxy for access to the size and coordinate space (for anchor resolution) of the container view.
     /// - Returns: A detent if the available detents are not empty.
-    private func potentialDetent(for offset: CGSize, in geometry: GeometryProxy) -> AccentPresentationDetent? {
+    private func potentialDetent(for offset: CGSize, in geometry: GeometryProxy) -> BottomSheetPresentationDetent? {
         spacingPerDetent(in: geometry).min { lhs, rhs in
             abs(lhs.value - offset.height) < abs(rhs.value - offset.height)
         }?.key
@@ -295,14 +295,14 @@ struct AccentSheet<Sheet>: ViewModifier where Sheet: View {
     /// Returns a detent that reduces the height of the sheet to the shortest when snaps to it
     /// - Parameter geometry: A proxy for access to the size and coordinate space (for anchor resolution) of the container view.
     /// - Returns: A detent if the available detents are not empty.
-    private func shortestDetent(in geometry: GeometryProxy) -> AccentPresentationDetent? {
+    private func shortestDetent(in geometry: GeometryProxy) -> BottomSheetPresentationDetent? {
         spacingPerDetent(in: geometry).max { lhs, rhs in
             lhs.value < rhs.value
         }?.key
     }
 }
 
-struct AccentSheet_Previews: PreviewProvider {
+struct BottomSheet_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             staticContent
@@ -315,11 +315,16 @@ struct AccentSheet_Previews: PreviewProvider {
     static private var staticContent: some View {
         NavigationView {
             Text("Content")
-                .navigationTitle("Accent Sheet")
-                .accentSheet(isPresented: .constant(true)) {
-                    LicenseAgreement()
-                        .padding()
-                        .accentPresentationDetents([.natural, .large])
+                .navigationTitle("Bottom Sheet")
+                .bottomSheet(isPresented: .constant(true)) {
+                    VStack(spacing: 16) {
+                        Text("License Agreement")
+                            .font(.title)
+                        Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
+                        Button("Agree", action: {})
+                    }
+                    .padding()
+                    .bottomSheetPresentationDetents([.natural, .large])
                 }
         }
     }
@@ -327,10 +332,18 @@ struct AccentSheet_Previews: PreviewProvider {
     static private var scrollableContent: some View {
         NavigationView {
             Text("Content")
-                .navigationTitle("Accent Sheet")
-                .accentSheet(isPresented: .constant(true)) {
-                    Numbers()
-                        .accentPresentationDetents([.fraction(0.2), .medium, .large])
+                .navigationTitle("Bottom Sheet")
+                .bottomSheet(isPresented: .constant(true)) {
+                    VStack {
+                        Text("List")
+                            .font(.headline)
+
+                        List(0...100, id: \.self) { (number: Int) in
+                            Text("\(number)")
+                        }
+                        .listStyle(.plain)
+                    }
+                    .bottomSheetPresentationDetents([.fraction(0.2), .medium, .large])
                 }
         }
     }

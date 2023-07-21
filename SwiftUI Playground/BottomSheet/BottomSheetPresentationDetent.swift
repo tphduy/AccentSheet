@@ -1,6 +1,6 @@
 //
-//  AccentPresentationDentent.swift
-//  SwiftUI Playground
+//  BottomSheetPresentationDetent.swift
+//  Vestiaire Collective
 //
 //  Created by Duy Tran on 27/06/2023.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// A type that represents a height where a sheet naturally rests.
-public enum AccentPresentationDetent: Hashable {
+public enum BottomSheetPresentationDetent: Hashable {
     /// The system detent for a sheet that grows to its natural size based on its content.
     case natural
 

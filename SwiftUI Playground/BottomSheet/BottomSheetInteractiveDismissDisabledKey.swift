@@ -1,13 +1,14 @@
 //
-//  InteractiveDismissDisabledKey.swift
-//  SwiftUI Playground
+//  BottomSheetInteractiveDismissDisabledKey.swift
+//  Vestiaire Collective
 //
 //  Created by Duy Tran on 19/07/2023.
 //
 
 import SwiftUI
 
-struct AccentInteractiveDismissDisabledKey: PreferenceKey {
+/// A named value to configure the interactive dismissal of the bottom sheet.
+struct BottomSheetInteractiveDismissDisabledKey: PreferenceKey {
     static var defaultValue: Bool {
         false
     }

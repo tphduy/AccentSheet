@@ -19,12 +19,12 @@ struct PickupPointPickerV2: View {
                     Toggle("Toggle Bottom Sheet", isOn: $viewModel.isSheetPresented)
                 }
             }
-            .accentSheet(isPresented: $viewModel.isSheetPresented) {
+            .bottomSheet(isPresented: $viewModel.isSheetPresented) {
                 Text("Carrier List")
                     .font(.title)
                     .padding()
-                    .accentPresentationDetents([.natural, .large])
-                    .accentPresentationDragIndicator(.visible)
+                    .bottomSheetPresentationDetents([.natural, .large])
+                    .bottomSheetPresentationDragIndicator(.visible)
             }
     }
 }

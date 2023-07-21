@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct LicenseAgreement: View {
+    var onAgree: () -> Void = {}
+    
     var body: some View {
         VStack(spacing: 16) {
             Text("License Agreement")
                 .font(.title)
             Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
-            Button("Dismiss") {}
+            Button("Agree", action: onAgree)
         }
     }
 }
