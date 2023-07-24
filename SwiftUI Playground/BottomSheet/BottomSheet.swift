@@ -196,8 +196,8 @@ struct BottomSheet<Sheet>: ViewModifier where Sheet: View {
 
     /// A view is sandwiched between the presenting view and the sheet to pass through the gesture or dismiss when tapped.
     private var passthroughBackground: some View {
-        Color(red: 0.93, green: 0.93, blue: 1)
-            .opacity(0.2)
+        Color.black
+            .opacity(0.12)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea()
             .contentShape(Rectangle())

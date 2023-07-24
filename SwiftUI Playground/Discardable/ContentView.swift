@@ -32,21 +32,22 @@ struct ContentView: View {
                         )
                     }
                 }
-                .bottomSheet(isPresented: $isPresented, content: sheetContent)
+                .bottomSheet(isPresented: $isPresented) {
+                    licenseAgreement
+                }
         }
     }
 
-    private func sheetContent() -> some View {
+    private var licenseAgreement: some View {
         LicenseAgreement(onAgree: {
             isAuthorized = true
         })
         .padding()
-        .bottomSheetPresentationDetents([.natural, .medium, .large])
-        .bottomSheetInteractiveDismissDisabled()
-        .bottomSheetPresentationDragIndicator()
-        .bottomSheetPresentationCornerRadius(16)
-        .bottomSheetPresentationShadowCornerRadius()
-        .bottomSheetPresentationPassthroughBackgroundDisabled()
+    }
+
+    private var numbers: some View {
+        Numbers()
+            .bottomSheetPresentationDetents([.fraction(0.2), .medium, .large])
     }
 }
 
