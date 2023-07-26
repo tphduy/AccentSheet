@@ -13,6 +13,7 @@ struct SwiftUI_PlaygroundApp: App {
         WindowGroup {
             NavigationView {
                 ContentView()
+//                PickupPointPickerV2()
             }
         }
     }

@@ -34,6 +34,7 @@ struct ContentView: View {
                 }
                 .bottomSheet(isPresented: $isPresented) {
                     licenseAgreement
+                        .presentationDetents([.medium, .large])
                 }
         }
     }
